@@ -1,0 +1,22 @@
+{
+  "name": "internship",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/serhii-123/internship.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/serhii-123/internship/issues"
+  },
+  "homepage": "https://github.com/serhii-123/internship#readme",
+  "description": "",
+  "dependencies": {
+    "tsx": "^4.20.3"
+  }
+}
