@@ -1,6 +1,16 @@
-import { createInterface, Interface, Readline } from "readline/promises";
+import { createInterface, Interface } from "readline/promises";
+import Op from "./Operations";
 
 async function start() {
+    const optionsHandlers = {
+        'a. Sort the words alphabetically.': Op.sortWordsAlphabetically,
+        'b. Display the numbers in ascending order.': Op.sortNumbersInAscendingOrder,
+        'c. Display the numbers in descending order.': Op.sortNumbersInDescendingOrder,
+        'd. Display the words in ascending order based on the number of letters in each word.': Op.sortWordsBasedOnNumberOfLetters,
+        'e. Show only unique words.': Op.getUniqueElements,
+        'f. Show only the unique values from the entire set of words and numbers.': Op.getUniqueElements
+    };
+    const options = Object.keys(optionsHandlers);
     console.clear();
     
     const rl: Interface = createInterface({
@@ -8,34 +18,30 @@ async function start() {
         output: process.stdout
     });
 
-    const firstAnswer:string = await rl.question('Enter 10 words and numbers\n');
-    const values: string[] = firstAnswer.split(' ');
-    const option = await getSortingOption(rl);
+    while(true) {
+        const answer:string = await rl.question('Enter 10 words and numbers or "exit" \n');
+        
+        if(answer === 'exit')
+            process.exit(0);
+        
+        const values: string[] = answer.split(' ');
+        const option = await getSortingOption(rl, options);
+        const result = await optionsHandlers[option](values);
 
-    console.clear();
+        console.log(result);
+    }
 }
 
-async function getSortingOption(rl: Interface): Promise<string> {
-    const options = [
-        'a. Sort the words alphabetically.',
-        'b. Display the numbers in ascending order.',
-        'c. Display the numbers in descending order.',
-        'd. Display the words in ascending order based on the number of letters in each word.',
-        'e. Show only unique words.',
-        'f. Show only the unique values from the entire set of words and numbers entered by the user.'
-    ];
-
+async function getSortingOption(rl: Interface, options: string[]): Promise<string> {
     while(true) {
         console.log('Enter the option:');
         options.map(o => console.log(o));
 
-        const answer = await rl.question('Enter one option\n');
+        const answer = await rl.question('\n');
         const findedOption = options?.find(el => el[0] === answer);
 
         if(findedOption) return findedOption;
-
-        console.clear();
-
+        
         console.log('Invalid input. Try again');
     }
 }
