@@ -18,5 +18,8 @@
   "description": "",
   "dependencies": {
     "tsx": "^4.20.3"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.1"
   }
 }
