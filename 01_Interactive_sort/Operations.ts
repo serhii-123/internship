@@ -7,13 +7,13 @@ class Operations {
 
     static async sortNumbersInAscendingOrder(arr: string[]): Promise<string[]> {
         return arr
-            .filter(s => !isNaN(parseFloat(s)))
+            .filter(s => /^d+$/.test(s))
             .sort((a, b) => parseFloat(a) - parseFloat(b));
     }
 
     static async sortNumbersInDescendingOrder(arr: string[]): Promise<string[]> {
         return arr
-            .filter(s => !isNaN(parseFloat(s)))
+            .filter(s => /^d+$/.test(s))
             .sort((a, b) => parseFloat(b) - parseFloat(a));
     }
 
