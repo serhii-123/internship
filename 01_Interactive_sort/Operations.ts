@@ -24,17 +24,26 @@ class Operations {
     }
 
     static async getUniqueWords(arr: string[]): Promise<string[]> {
-        return arr
-            .filter(s => !/^\d+(\.\d+)?$/.test(s))
-            .filter((s, i) => (
-                arr.filter((str, ind) => str == s && ind != i).length == 0
-            ));
+        const wordsArr: string[] = arr.filter(s => !/^\d+(\.\d+)?$/.test(s));
+        const result: string[] = [];
+        
+        wordsArr.map(s => {
+            if(!result.includes(s))
+                result.push(s);
+        });
+
+        return result;
     }
 
     static async getUniqueElements(arr: string[]): Promise<string[]> {
-        return arr.filter((s, i) => (
-            arr.filter((str, ind) => str == s && ind != i).length == 0
-        ));
+        const result: string[] = [];
+        
+        arr.map(s => {
+            if(!result.includes(s))
+                result.push(s);
+        });
+
+        return result;
     }
 }
 
