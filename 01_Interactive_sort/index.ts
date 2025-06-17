@@ -11,7 +11,7 @@ async function start() {
         'b. Display the numbers in ascending order.': Op.sortNumbersInAscendingOrder,
         'c. Display the numbers in descending order.': Op.sortNumbersInDescendingOrder,
         'd. Display the words in ascending order based on the number of letters in each word.': Op.sortWordsBasedOnNumberOfLetters,
-        'e. Show only unique words.': Op.getUniqueElements,
+        'e. Show only unique words.': Op.getUniqueWords,
         'f. Show only the unique values from the entire set of words and numbers.': Op.getUniqueElements
     };
     const options = Object.keys(optionsHandlers);
