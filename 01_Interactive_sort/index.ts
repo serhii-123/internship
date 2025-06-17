@@ -1,8 +1,12 @@
 import { createInterface, Interface } from "readline/promises";
 import Op from "./Operations";
 
+type OptionsHandlers = {
+    [key: string]: (arr: string[]) => Promise<string[]>;
+}
+
 async function start() {
-    const optionsHandlers = {
+    const optionsHandlers: OptionsHandlers = {
         'a. Sort the words alphabetically.': Op.sortWordsAlphabetically,
         'b. Display the numbers in ascending order.': Op.sortNumbersInAscendingOrder,
         'c. Display the numbers in descending order.': Op.sortNumbersInDescendingOrder,
@@ -25,10 +29,17 @@ async function start() {
             process.exit(0);
         
         const values: string[] = answer.split(' ');
-        const option = await getSortingOption(rl, options);
-        const result = await optionsHandlers[option](values);
 
-        console.log(result);
+        if(values.length != 10) {
+            console.log('Invalid input. You should enter 10 words and numbers');
+            continue;
+        }
+
+        const option = await getSortingOption(rl, options);
+        const result: string[] = await optionsHandlers[option](values);
+
+        console.log('Result: ');
+        result.map(s => console.log(s));
     }
 }
 
