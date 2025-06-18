@@ -17,6 +17,8 @@
   "homepage": "https://github.com/serhii-123/internship#readme",
   "description": "",
   "dependencies": {
+    "@inquirer/prompts": "^7.5.3",
+    "inquirer": "^12.6.3",
     "tsx": "^4.20.3"
   },
   "devDependencies": {
