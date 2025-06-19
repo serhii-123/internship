@@ -1,4 +1,3 @@
-import fs from 'fs';
 import { config } from 'dotenv';
 import { program } from "commander";
 import { Bot, InputFile } from 'grammy';
@@ -6,7 +5,7 @@ import { Bot, InputFile } from 'grammy';
 config();
 
 const token: string = process.env.TOKEN as string;
-const chatId: number = 487039484;
+const chatId: string = process.env.CHAT_ID as string;
 const bot = new Bot(token);
 
 bot.on('message', ctx => {
@@ -26,9 +25,6 @@ program
     .argument('<string>')
     .description('Sends a picture')
     .action(str => {
-        // bot.api.sendPhoto(chatId, {
-        //     source: fs.createReadStream(str)
-        // });
         bot.api.sendPhoto(chatId, new InputFile(str));
     });
 

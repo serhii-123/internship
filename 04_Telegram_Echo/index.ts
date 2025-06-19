@@ -1,6 +1,8 @@
 import { Bot } from 'grammy';
+import { config } from 'dotenv';
+config();
 
-const token = '';
+const token: string = process.env.TOKEN as string;
 const bot = new Bot(token);
 
 bot.hears('photo', c => {
