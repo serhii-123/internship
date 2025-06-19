@@ -1,10 +1,13 @@
 import fs from 'fs';
+import { config } from 'dotenv';
 import { program } from "commander";
-import { Telegraf } from "telegraf";
+import { Bot, InputFile } from 'grammy';
 
-const token: string = "";
+config();
+
+const token: string = process.env.TOKEN as string;
 const chatId: number = 487039484;
-const bot = new Telegraf(token);
+const bot = new Bot(token);
 
 bot.on('message', ctx => {
     console.log(ctx.chat.id);
@@ -15,7 +18,7 @@ program
     .argument('<string>')
     .description('Sends a text')
     .action(str => {
-        bot.telegram.sendMessage(chatId, str);
+        bot.api.sendMessage(chatId, str);
     });
 
 program
@@ -23,9 +26,10 @@ program
     .argument('<string>')
     .description('Sends a picture')
     .action(str => {
-        bot.telegram.sendPhoto(chatId, {
-            source: fs.createReadStream(str)
-        });
+        // bot.api.sendPhoto(chatId, {
+        //     source: fs.createReadStream(str)
+        // });
+        bot.api.sendPhoto(chatId, new InputFile(str));
     });
 
 program.parse();
