@@ -1,6 +1,6 @@
 import { Bot } from 'grammy';
 
-const token = '7648991639:AAFZfo3zs3tsIcSpyULn_stQO3PDdPiQdxA';
+const token = '';
 const bot = new Bot(token);
 
 bot.on('message:text', c => {

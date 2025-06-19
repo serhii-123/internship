@@ -2,7 +2,7 @@ import fs from 'fs';
 import { program } from "commander";
 import { Telegraf } from "telegraf";
 
-const token: string = "7648991639:AAFZfo3zs3tsIcSpyULn_stQO3PDdPiQdxA";
+const token: string = "";
 const chatId: number = 487039484;
 const bot = new Telegraf(token);
 
