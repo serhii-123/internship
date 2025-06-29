@@ -1,23 +1,14 @@
 import { google } from "googleapis";
 
-async function authorize(email: string, key: string) {
+async function authorize(redirectURI: string, refreshToken: string, clientId: string, email: string, access_token: string) {
     const scopes: string[] = ['https://www.googleapis.com/auth/drive'];
-    const auth = new google.auth.JWT({
-        email,
-        key,
-        scopes
+    const auth = new google.auth.OAuth2(clientId, access_token, redirectURI);
+
+    auth.setCredentials({
+        refresh_token: refreshToken,
     });
 
-    try {
-        await auth.authorize();
-
-        return auth;
-    } catch(e) {
-        if(e instanceof Error)
-            throw new Error(e.message);
-        else
-            throw new Error('Some error happened');
-    }
+    return auth;
 }
 
 export default authorize;

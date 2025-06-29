@@ -1,13 +1,13 @@
 import { createReadStream } from "fs";
-import { JWT } from "google-auth-library";
+import { OAuth2Client } from "google-auth-library";
 import { google } from "googleapis";
 
 async function uploadFile(
-    auth: JWT,
+    auth: OAuth2Client,
     filePath: string,
     fileName: string,
     folderId: string
-) {
+): Promise<string> {
     const drive = google.drive({
         version: 'v3',
         auth
@@ -24,16 +24,18 @@ async function uploadFile(
     };
 
     try {
-        await drive.files.create({
+        const result = await drive.files.create({
             requestBody: fileMetadata,
             media,
             fields: 'id'
         });
+
+        return result.url;
     } catch(e) {
         if(e instanceof Error)
-            console.log('Error uploading file to G Drive, ' + e.message);
+            throw new Error('Error uploading file to G Drive, ' + e.message);
         else
-            console.log('Error uploading file to G Drive');
+            throw new Error('Error uploading file to G Drive');
     }
 }
 
