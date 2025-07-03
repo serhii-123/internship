@@ -17,8 +17,9 @@ async function start(dir: string) {
     console.log(
         `Number of unique usernames: ${uniqueUsernamesCount}. Execution time: ${t1 - t0}ms\n`
         + `Number of usernames found in at least 10 files: ${usernamesAtleast10TimesCount}. Execution time: ${t2 - t1}ms\n`
-        + `Number of usernames found in all files: ${uniqueUsernamesCount}. Execution time: ${t3 - t2}ms`
-    )
+        + `Number of usernames found in all files: ${commonUsernamesCount}. Execution time: ${t3 - t2}ms\n`
+        + `Common execution time: ${t3 - t0}ms`
+    );
 }
 
 start(DIR);

@@ -107,7 +107,8 @@ bot.hears('Кожні 6 годин', async c => {
 bot.hears('USD', async c => {
     const res = await axios.get(currencyURL);
     const data = res.data;
-    const currencyObj = data.find(o => o.currencyCodeA === 840);
+    const currencyCode: number = 840;
+    const currencyObj = data.find(o => o.currencyCodeA === currencyCode);
     const reply = await Currency.getReply(currencyObj, 'USD');
 
     c.reply(reply);
@@ -116,7 +117,8 @@ bot.hears('USD', async c => {
 bot.hears('EUR', async c => {
     const res = await axios.get(currencyURL);
     const data = res.data;
-    const currencyObj = data.find(o => o.currencyCodeA === 978);
+    const currencyCode: number = 978;
+    const currencyObj = data.find(o => o.currencyCodeA === currencyCode);
     const reply = await Currency.getReply(currencyObj, 'EUR');
 
     c.reply(reply);

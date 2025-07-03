@@ -12,7 +12,7 @@ const bot: Bot = new Bot(botToken);
 const weatherURL: string = 'https://api.openweathermap.org/data/2.5/weather';
 const forecastURL: string = 'https://api.openweathermap.org/data/2.5/forecast';
 
-bot.command('weather', c => {
+bot.command('start', c => {
     const kb = new InlineKeyboard()
         .text('Weather forecast in Zhytomyr', 'default_weather')
         .row()

@@ -18,7 +18,7 @@ class FileUtils {
     }
 
     static async getNameByPath(path: string): Promise<string> {
-        const nameStartIndex: number = path.lastIndexOf('/') + 1
+        const nameStartIndex: number = path.lastIndexOf('/') + 1;
         const name = path.slice(nameStartIndex);
 
         return name;

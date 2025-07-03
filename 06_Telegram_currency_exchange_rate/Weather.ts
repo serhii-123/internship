@@ -1,7 +1,7 @@
 class Weather {
     static async getWindReply(data): Promise<string> {
         const speed: number = Math.floor(data.wind.speed);
-        const reply: string = `Швидкість вітру складає ${speed}км/год`;
+        const reply: string = `Швидкість вітру складає ${speed} км/год`;
 
         return reply;
     }
@@ -39,13 +39,16 @@ class Weather {
                 str += `${dayName}, ${formattedDay}:\n`;
             }
 
-            str += `  ${time}, `
-                + (temp >= 0 ? '+' : '')
-                + Math.floor(temp) + ' °C, '
-                + 'відчувається: '
+            const timeStr: string = `  ${time}`;
+            const actualTempStr: string = (temp >= 0 ? '+' : '')
+                + Math.floor(temp) + ' °C'
+            const feelsLikeTempStr: string = 'відчувається: '
                 + (feelsLike >= 0 ? '+' : '')
-                + Math.floor(feelsLike) + ' °C, '
-                + description;
+                + Math.floor(feelsLike) + ' °C'
+            str += timeStr
+                + ', ' + actualTempStr
+                + ', ' + feelsLikeTempStr
+                + ', ' + description;
 
             str += '\n';
         }
