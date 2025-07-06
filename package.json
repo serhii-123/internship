@@ -17,6 +17,7 @@
   "homepage": "https://github.com/serhii-123/internship#readme",
   "description": "",
   "dependencies": {
+    "@hono/node-server": "^1.15.0",
     "@inquirer/prompts": "^7.5.3",
     "axios": "^1.10.0",
     "commander": "^14.0.0",
@@ -24,6 +25,7 @@
     "google-auth-library": "^10.1.0",
     "googleapis": "^150.0.1",
     "grammy": "^1.36.3",
+    "hono": "^4.8.4",
     "inquirer": "^12.6.3",
     "telegraf": "^4.16.3",
     "tsx": "^4.20.3"
