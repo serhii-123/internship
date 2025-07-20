@@ -1,127 +1,146 @@
 import { config } from 'dotenv';
-import axios from 'axios';
-import { Bot, Keyboard } from 'grammy';
-import Weather from './Weather';
-import Currency from './Currency';
+import { Bot, Keyboard, session } from 'grammy';
+import {
+    KeyboardBuilder, WeatherConversations,
+    CurrencyDataFetcher, CurrencyMsgBuilder, CurrencyError
+} from './classes';
+import { MyContext } from './types';
+import {
+    conversations,
+    createConversation
+} from '@grammyjs/conversations';
 
 config();
 
-const botToken: string = process.env.BOT_TOKEN as string;
-const weatherToken: string = process.env.WEATHER_TOKEN as string;
-const bot: Bot = new Bot(botToken);
-const weatherURL: string = 'https://api.openweathermap.org/data/2.5/weather';
-const forecastURL: string = 'https://api.openweathermap.org/data/2.5/forecast';
-const currencyURL: string = 'https://api.monobank.ua/bank/currency';
-
-bot.command('start', async c => {
-    const kb = new Keyboard()
-        .text('Погода')
-        .row()
-        .text('Курс валют');
+async function start() {
+    const BOT_TOKEN: string = process.env.BOT_TOKEN as string;
+    const WEATHER_TOKEN: string = process.env.WEATHER_TOKEN as string;
     
-    c.reply('...', {
-        reply_markup: kb
-    });
-});
+    const bot = new Bot<MyContext>(BOT_TOKEN);
 
-bot.hears('Погода', async c => {
-    const kb = new Keyboard()
-        .text('Кожні 3 години')
-        .text('Кожні 6 годин')
-        .row()
-        .text('Вітер')
-        .row()
-        .text('Попереднє меню');
-    
-    c.reply('...', {
-        reply_markup: kb
-    });
-});
+    bot.use(session({
+        initial: () => ({ city: '' })
+    }));
+    bot.use(conversations());
+    bot.use(createConversation(WeatherConversations.windConversation));
+    bot.use(createConversation(WeatherConversations.weatherWithIntervalConversation));
+    bot.use(createConversation(WeatherConversations.changeCityConversation));
 
-bot.hears('Курс валют', async c => {
-    const kb = new Keyboard()
-        .text('USD')
-        .text('EUR')
-        .row()
-        .text('Попереднє меню');
-
-    c.reply('...', {
-        reply_markup: kb
-    });
-});
-
-bot.hears('Попереднє меню', async c => {
-    const kb = new Keyboard()
-        .text('Погода')
-        .row()
-        .text('Курс валют');
-    
-    c.reply('...', {
-        reply_markup: kb
-    });
-});
-
-bot.hears('Вітер', async c => {
-    const res = await axios.get(weatherURL, {
-        params: {
-            q: 'Zhytomyr',
-            units: 'metric',
-            appid: weatherToken,
-            lang: 'uk'
+    bot.command('start', async c => {
+        try {
+            const kb: Keyboard = await KeyboardBuilder.getMainKeyboard();
+            
+            c.reply('...', {
+                reply_markup: kb
+            });
+        } catch(e) {
+            await handleBotHandlerError(e);
         }
     });
-    const data = res.data;
-    const reply: string = await Weather.getWindReply(data);
 
-    c.reply(reply);
-});
+    bot.hears('Погода', async c => {
+        try {
+            const city: string = c.session.city;
+            const kb: Keyboard = await KeyboardBuilder.getWeatherKeyboard(city);
 
-bot.hears('Кожні 3 години', async c => {
-    const res = await axios.get(forecastURL, {
-        params: {
-            q: 'Zhytomyr',
-            units: 'metric',
-            appid: weatherToken,
-            lang: 'uk'
+            c.reply('...', {
+                reply_markup: kb
+            });
+        } catch(e) {
+            await handleBotHandlerError(e);
         }
     });
-    const data = res.data;
-    const reply: string = await Weather.getReplyWithInterval(data, 3);
-    c.reply(reply);
-});
 
-bot.hears('Кожні 6 годин', async c => {
-    const res = await axios.get(forecastURL, {
-        params: {
-            q: 'Zhytomyr',
-            units: 'metric',
-            appid: weatherToken,
-            lang: 'uk'
+    bot.hears('Курс валют', async c => {
+        try {
+            const kb = await KeyboardBuilder.getCurrencyKeyboard();
+
+            c.reply('...', {
+                reply_markup: kb
+            });
+        } catch(e) {
+            await handleBotHandlerError(e);
         }
     });
-    const data = res.data;
-    const reply: string = await Weather.getReplyWithInterval(data, 6);
-    c.reply(reply);
-});
 
-bot.hears('USD', async c => {
-    const res = await axios.get(currencyURL);
-    const data = res.data;
-    const currencyCode: number = 840;
-    const currencyObj = data.find(o => o.currencyCodeA === currencyCode);
-    const reply = await Currency.getReply(currencyObj, 'USD');
+    bot.hears('Попереднє меню', async c => {
+        try {
+            const kb = await KeyboardBuilder.getMainKeyboard();
+            
+            c.reply('...', {
+                reply_markup: kb
+            });
+        } catch(e) {
+            await handleBotHandlerError(e);
+        }
+    });
 
-    c.reply(reply);
-});
+    bot.hears('Вітер', async c => {
+        await c.conversation.enter('windConversation', WEATHER_TOKEN);
+    });
 
-bot.hears('EUR', async c => {
-    const res = await axios.get(currencyURL);
-    const data = res.data;
-    const currencyCode: number = 978;
-    const currencyObj = data.find(o => o.currencyCodeA === currencyCode);
-    const reply = await Currency.getReply(currencyObj, 'EUR');
+    bot.hears('Кожні 3 години', async c => {
+        const hoursInterval: number = 3;
 
-    c.reply(reply);
-});
+        await c.conversation.enter(
+            'weatherWithIntervalConversation',
+            WEATHER_TOKEN,
+            hoursInterval
+        );
+    });
 
-bot.start();
+    bot.hears('Кожні 6 годин', async c => {
+        const hoursInterval: number = 6;
+        
+        await c.conversation.enter(
+            'weatherWithIntervalConversation',
+            WEATHER_TOKEN,
+            hoursInterval
+        );
+    });
+
+    bot.hears('Змінити місто', async c => {
+        await c.conversation.enter('changeCityConversation');
+    });
+
+    bot.hears('USD', async c => {
+        try {
+            const currencyObj = await CurrencyDataFetcher.getUSDData();
+            const msg: string = await CurrencyMsgBuilder.getMessage(currencyObj);
+
+            c.reply(msg);
+        } catch(e) {
+            await handleBotHandlerError(e);
+        }
+    });
+
+    bot.hears('EUR', async c => {
+        try {
+            const currencyObj = await CurrencyDataFetcher.getEURData();
+            const msg: string = await CurrencyMsgBuilder.getMessage(currencyObj);
+
+            c.reply(msg);
+        } catch(e) {
+            await handleBotHandlerError(e);
+        }
+    });
+
+    bot.catch((err) => {
+        const sliceIndex: number = err.message.indexOf(':') + 2;
+        const message = err.message.slice(sliceIndex);
+        
+        console.log(err.message);
+        err.ctx.reply(message);
+    });
+
+    async function handleBotHandlerError(e) {
+        if(e instanceof CurrencyError)
+            throw new Error('Не вдається отримати дані про курси валют. Будь ласка, спробуйте пізніше');
+        else
+            throw new Error('Сталася помилка. Будь ласка, спробуйте пізніше');
+    }
+
+    bot.start();
+}
+
+start();
