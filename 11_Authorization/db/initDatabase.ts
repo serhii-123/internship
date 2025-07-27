@@ -1,15 +1,15 @@
 import { Db } from "mongodb";
 import { NewUser } from "../types/user";
-import { RefreshToken } from "../types/refreshToken";
+import { Session } from "../types/session";
 
 async function initDatabase(db: Db) {
     const usersCollection = db.collection('users');
-    const refreshTokensCollection = db.collection('refresh_tokens');
+    const sessionsCollection = db.collection('sessions');
 
     await usersCollection.createIndex({ email: 1 }, { unique: true });
 
     const usersCount = await usersCollection.countDocuments();
-    const refreshTokensCount = await refreshTokensCollection.countDocuments();
+    const refreshTokensCount = await sessionsCollection.countDocuments();
 
     if(usersCount === 0) {
         const user: NewUser = { 
@@ -21,15 +21,15 @@ async function initDatabase(db: Db) {
     }
 
     if(refreshTokensCount === 0) {
-        const refreshToken: RefreshToken = {
+        const refreshToken: Session = {
             tokenHash: 'hash',
             userId: 'userid',
             createdAt: new Date(),
-            expiresAt: new Date(),
+            expiresIn: new Date(),
             revoked: true,
         }
 
-        await refreshTokensCollection.insertOne(refreshToken);
+        await sessionsCollection.insertOne(refreshToken);
     }
 }
 

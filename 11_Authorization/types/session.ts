@@ -1,9 +1,9 @@
-type RefreshToken = {
+type Session = {
     tokenHash: string,
     userId: string,
-    expiresAt: Date,
     createdAt: Date,
+    expiresIn: Date,
     revoked: boolean
 }
 
-export { RefreshToken };
+export { Session };

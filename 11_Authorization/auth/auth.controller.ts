@@ -1,7 +1,14 @@
 import { Context } from "hono";
-import { SignUpRequestDto, SignUpResponseDto } from "./dto/signUp.dto";
+import { SignUpResponseDto } from "./dto/signUp.dto";
 import AuthService from "./auth.service";
 import { MongoServerError } from "mongodb";
+import { LoginResponseDto } from "./dto/login.dto";
+import AuthError from "../errors/AuthError";
+import { loginSchema, refreshTokenSchema, signUpSchema } from "./auth.schema";
+import { ZodError } from "zod";
+import InvalidJwtTokenError from "../errors/InvalidJwtTokenError";
+import SessionNotFoundError from "../errors/SessionNotFoundError";
+import { JsonWebTokenError } from "jsonwebtoken";
 
 class AuthController {
     constructor(
@@ -10,22 +17,70 @@ class AuthController {
 
     async signUp(c: Context) {
         try {
-            const body: SignUpRequestDto = await c.req.json();
-            const keys: SignUpResponseDto = await this.authService.signUp(body);
+            const body = await c.req.json().catch(() => null);
+
+            if(!body) 
+                return c.body('Bad request', 400);
+
+            const { email, password } = await signUpSchema.parseAsync(body);
+            const keys: SignUpResponseDto = await this.authService.signUp(email, password);
 
             return c.json(keys);
         } catch(e) {
-            if(e instanceof MongoServerError) {
-                if(e.code === 11000) {
-                    c.status(409);
+            if(e instanceof ZodError)
+                return c.body('Bad request', 400);
 
-                    return c.body(`A user with the specified email already exists`);
-                } else {
-                    c.status(500);
-                    
-                    return c.body('Server error. Please, try again later');
-                }
-            }
+            if(e instanceof MongoServerError)
+                if(e.code === 11000)
+                    return c.body(`A user with the specified email already exists`, 409);
+                else
+                    return c.body('Server error. Please, try again later', 500);
+
+            return c.body('Server error', 500);
+        }
+    }
+
+    async login(c: Context) {
+        try {
+            const queries = {
+                email: c.req.query('email'),
+                password: c.req.query('password')
+            };
+            const { email, password } = await loginSchema.parseAsync(queries);
+            const keys: LoginResponseDto = await this.authService.login(email, password);
+
+            return c.json(keys);
+        } catch(e) {
+            if(e instanceof ZodError)
+                return c.body('Bad request', 400);
+
+            if(e instanceof AuthError)
+                return c.body('Invalid email and/or password', 401);
+
+            return c.body('Server error', 500);
+        }
+    }
+
+    async refresh(c: Context) {
+        try {
+            const authHeader = c.req.header('Authorization');
+            const refreshToken = authHeader?.split(' ')[1];
+            const validatedToken = await refreshTokenSchema.parseAsync(refreshToken);
+            const access_token = await this.authService.refresh(validatedToken);
+
+            return c.json({ access_token });
+        } catch(e) {
+            if(e instanceof ZodError)
+                return c.body('Invalid token', 401);
+
+            if(
+                e instanceof SessionNotFoundError
+                || e instanceof InvalidJwtTokenError
+                || e instanceof JsonWebTokenError
+            )
+                return c.body('Unauthorized', 401);
+            
+            return c.body('Server error', 500);
         }
     }
 }

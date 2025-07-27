@@ -1,19 +1,41 @@
-import { Db } from "mongodb";
-import { NewUser } from "../types/user";
+import { Collection, Db } from "mongodb";
+import { NewUserDb, UserDb, UserOutput } from "./user.type";
 
 class UserModel {
     private db: Db;
+    private collection: Collection<UserDb>;
 
     constructor(db: Db) {
         this.db = db;
+        this.collection = db.collection('users')
     }
+
     async createUser(email: string, passwordHash: string): Promise<string> {
-        const insertObj: NewUser = { email, passwordHash };
-        const userCollection = this.db.collection('users');
-        const result = await userCollection.insertOne(insertObj);
+        const insertObj: NewUserDb = { email, passwordHash };
+        const result = await this.collection.insertOne(insertObj as UserDb);
         const id = result.insertedId.toString();
 
         return id;
+    }
+
+    async getUserByEmail(email: string): Promise<UserOutput | undefined> {
+        const doc = await this.collection.findOne({ email });
+        
+        if(!doc) return undefined;
+
+        const user = await this.convertUser(doc);
+
+        return user;
+    }
+
+    private async convertUser(doc: UserDb): Promise<UserOutput> {
+        const user = {
+            id: doc._id.toString(),
+            email: doc.email,
+            passwordHash: doc.passwordHash
+        }
+
+        return user;
     }
 }
 
