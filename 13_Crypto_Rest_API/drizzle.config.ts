@@ -5,7 +5,7 @@ config();
 
 export default defineConfig({
     out: './drizzle',
-    schema: './src/db/schema.ts',
+    schema: './db/schema.ts',
     dialect: 'mysql',
     dbCredentials: {
         url: process.env.DB_URL!,

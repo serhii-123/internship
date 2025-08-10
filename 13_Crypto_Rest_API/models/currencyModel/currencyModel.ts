@@ -8,6 +8,14 @@ class CurrencyModel {
         private readonly db: MySql2Database,
     ) {}
 
+    async getCurrencies(): Promise<Currency[]> {
+        const result = await this.db
+            .select()
+            .from(currencies);
+
+        return result;
+    }
+
     async getCurrencyByName(name: string): Promise<Currency | null> {
         const result = await this.db
             .select()

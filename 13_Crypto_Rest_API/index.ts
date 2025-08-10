@@ -1,7 +1,7 @@
 import { Hono } from "hono";
 import { serve } from "@hono/node-server";
 import ExchangeController from "./controllers/exhcange/exchangeController";
-import ExchangeService from "./services/exchageService/exchangeService";
+import ExchangeProviderService from "./services/exchageProviderService/exchangeProviderService";
 import ExchangeRateModel from "./models/exchangeRateModel/exchangeRateModel";
 import { connectDB } from "./db";
 import { DB_URL } from "./config/env";
@@ -17,7 +17,7 @@ async function start() {
     const currencyModel = new CurrencyModel(db);
     const marketModel = new MarketModel(db);
 
-    const exchangeService = new ExchangeService(exchangeRateModel, currencyModel, marketModel);
+    const exchangeService = new ExchangeProviderService(exchangeRateModel, currencyModel, marketModel);
 
     const exchangeController = new ExchangeController(exchangeService);
 
