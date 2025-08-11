@@ -7,6 +7,7 @@ import { connectDB } from "./db";
 import { DB_URL } from "./config/env";
 import CurrencyModel from "./models/currencyModel/currencyModel";
 import MarketModel from "./models/marketModel/marketModel";
+import ExchangeFetcherService from "./services/exchangeFetcherService/exchangeFetcherService";
 
 async function start() {
     const hono = new Hono();
@@ -17,9 +18,10 @@ async function start() {
     const currencyModel = new CurrencyModel(db);
     const marketModel = new MarketModel(db);
 
-    const exchangeService = new ExchangeProviderService(exchangeRateModel, currencyModel, marketModel);
+    const exchangeProviderService = new ExchangeProviderService(exchangeRateModel, currencyModel, marketModel);
+    const exchangeFetcherService = new ExchangeFetcherService(marketModel, currencyModel, exchangeRateModel);
 
-    const exchangeController = new ExchangeController(exchangeService);
+    const exchangeController = new ExchangeController(exchangeProviderService);
 
     hono.get('/currency', async c => await exchangeController.sendRate(c));
 

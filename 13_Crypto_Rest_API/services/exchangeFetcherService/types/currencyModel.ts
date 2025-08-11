@@ -1,7 +1,7 @@
 import Currency from "./currency";
 
 interface CurrencyModel {
-    getCurrencies: () => Promise<Currency[] | null>
+    getCurrencyByName: (name: string) => Promise<Currency | null>
 }
 
 export default CurrencyModel;

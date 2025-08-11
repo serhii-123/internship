@@ -4,8 +4,8 @@ interface ExchangeRateModel {
     insertExchangeRate(
         currencyId: number,
         marketId: number,
-        priceInUsd: number,
-        receivedAt: Date
+        priceInUsd: string,
+        receivedAt: string
     ): Promise<boolean>
 }
 

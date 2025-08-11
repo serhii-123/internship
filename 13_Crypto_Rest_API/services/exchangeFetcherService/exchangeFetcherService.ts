@@ -1,6 +1,6 @@
 import axios from 'axios';
+import { format } from 'date-fns';
 import ExchangeRateModel from "./types/exchangeRateModel";
-import Currency from './types/currency';
 import CurrencyModel from './types/currencyModel';
 import MarketModel from './types/marketModel';
 
@@ -20,38 +20,28 @@ class ExchangeFetcherService {
 
         if(!market) throw new Error('No market found by given name');
 
-        const currencies = await this.currencyModel.getCurrencies();
-
-        if(!currencies) throw new Error('No currencies in DB');
-
         const res = await axios.get(url, {
-            headers: {
-                'CMC_PRO_API_KEY': apiKey
-            }
+            params: { 'CMC_PRO_API_KEY': apiKey }
         });
 
         const cryptoData = res.data.data;
 
         for(let o of cryptoData) {
             const symbol: string = o.symbol;
-            const currencyExistsInDb = await this.checkIsCurrencyExists(currencies, symbol);
+            const currency = await this.currencyModel.getCurrencyByName(symbol);
+            const timestamp = format(new Date(), 'yyyy-MM-dd HH:mm:ss');
 
-            if(!currencyExistsInDb) continue;
+            if(!currency) continue;
 
-            const price: number = o.quote.USD.price;
+            const priceInUsd: string = o.quote.USD.price.toString();
 
+            await this.exchangeRateModel.insertExchangeRate(
+                currency.id,
+                market.id,
+                priceInUsd,
+                timestamp
+            );
         }
-    }
-
-    private async checkIsCurrencyExists(
-        currencies: Currency[],
-        currency: string
-    ): Promise<boolean> {
-        const currencyObj = currencies.find(
-            (el) => el.name.toLowerCase() === currency.toLowerCase()
-        );
-
-        return !!currencyObj;
     }
 }
 

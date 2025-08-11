@@ -13,6 +13,7 @@ class ExchangeService {
         market?: string,
         period?: string
     ): Promise<any> {
+        console.log(currency, market, period)
         const currencyObj = await this
             .currencyModel
             .getCurrencyByName(currency.toLowerCase());
@@ -21,21 +22,28 @@ class ExchangeService {
 
         if(!currencyObj) throw new Error('Cannot find currency');
 
-        if(market)
+        if(market) {
             marketObj = await this
                 .marketModel
                 .getMarketByName(market);
 
-        if(!marketObj) throw new Error('Cannot find market');
+            if(!marketObj) throw new Error('Cannot find market');
+        }
 
         if(period)
             periodDate = await this.getPeriodDate(period);
 
-        const responseData = await this
+        let exchangeRateData = await this
             .exchangeRateModel
             .getExchangeRateData(currencyObj.id, marketObj?.id, periodDate);
 
-        return responseData;
+        if(!market) {
+            let lastRow = exchangeRateData[0]
+            exchangeRateData = [lastRow];
+        }
+        // find average if market is not provided...
+
+        return exchangeRateData;
     }
 
     private async getPeriodDate(period: string): Promise<string> {
