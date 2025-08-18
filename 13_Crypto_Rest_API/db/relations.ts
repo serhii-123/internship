@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm/relations";
-import { currencies, exchangeRates, markets } from "./schema";
+import { currencies, exchangeRates, markets, receivingTimestamps } from "./schema";
 
 export const exchangeRatesRelations = relations(exchangeRates, ({one}) => ({
 	currency: one(currencies, {
@@ -10,6 +10,10 @@ export const exchangeRatesRelations = relations(exchangeRates, ({one}) => ({
 		fields: [exchangeRates.marketId],
 		references: [markets.id]
 	}),
+	receivingTimestamp: one(receivingTimestamps, {
+		fields: [exchangeRates.receivingTimestampId],
+		references: [receivingTimestamps.id]
+	}),
 }));
 
 export const currenciesRelations = relations(currencies, ({many}) => ({
@@ -17,5 +21,9 @@ export const currenciesRelations = relations(currencies, ({many}) => ({
 }));
 
 export const marketsRelations = relations(markets, ({many}) => ({
+	exchangeRates: many(exchangeRates),
+}));
+
+export const receivingTimestampsRelations = relations(receivingTimestamps, ({many}) => ({
 	exchangeRates: many(exchangeRates),
 }));
