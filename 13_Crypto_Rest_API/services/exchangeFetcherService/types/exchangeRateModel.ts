@@ -5,7 +5,7 @@ interface ExchangeRateModel {
         currencyId: number,
         marketId: number,
         priceInUsd: string,
-        receivedAt: string
+        receivingTimestampId: number
     ): Promise<boolean>
 }
 

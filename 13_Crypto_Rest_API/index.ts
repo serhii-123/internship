@@ -1,13 +1,19 @@
 import { Hono } from "hono";
 import { serve } from "@hono/node-server";
+import { CronJob } from 'cron';
 import ExchangeController from "./controllers/exhcange/exchangeController";
 import ExchangeProviderService from "./services/exchageProviderService/exchangeProviderService";
 import ExchangeRateModel from "./models/exchangeRateModel/exchangeRateModel";
 import { connectDB } from "./db";
-import { DB_URL } from "./config/env";
+import {
+    DB_URL,
+    COINMARKETCAP_API_KEY,
+    COINSTATS_API_KEY
+} from "./config/env";
 import CurrencyModel from "./models/currencyModel/currencyModel";
 import MarketModel from "./models/marketModel/marketModel";
 import ExchangeFetcherService from "./services/exchangeFetcherService/exchangeFetcherService";
+import ReceivingTimestampModel from "./models/receivingTimestampModel/receivingTimestampModel";
 
 async function start() {
     const hono = new Hono();
@@ -17,9 +23,10 @@ async function start() {
     const exchangeRateModel = new ExchangeRateModel(db);
     const currencyModel = new CurrencyModel(db);
     const marketModel = new MarketModel(db);
+    const receivingTimestampModel = new ReceivingTimestampModel(db);
 
     const exchangeProviderService = new ExchangeProviderService(exchangeRateModel, currencyModel, marketModel);
-    const exchangeFetcherService = new ExchangeFetcherService(marketModel, currencyModel, exchangeRateModel);
+    const exchangeFetcherService = new ExchangeFetcherService(marketModel, currencyModel, receivingTimestampModel, exchangeRateModel);
 
     const exchangeController = new ExchangeController(exchangeProviderService);
 
@@ -31,7 +38,21 @@ async function start() {
         port: 3000
     });
 
-    
+    new CronJob(
+        '0 5 * * * *',
+        async () => {
+            console.log('Cron started');
+            await exchangeFetcherService.fetchData(
+                COINMARKETCAP_API_KEY,
+                COINSTATS_API_KEY
+            );
+        },
+        null,
+        true,
+        'Europe/Kyiv',
+        null,
+        true
+    );
 }
 
 start();
