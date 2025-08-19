@@ -33,7 +33,7 @@ class ExchangeRateModel {
         const result = await this.db
             .select({
                 priceInUsd: avg(exchangeRates.priceInUsd),
-                received_at: receivingTimestamps.timestamp
+                receivedAt: receivingTimestamps.timestamp
             }).from(exchangeRates)
             .innerJoin(currencies, eq(exchangeRates.currencyId, currencies.id))
             .innerJoin(receivingTimestamps, eq(exchangeRates.receivingTimestampId, receivingTimestamps.id))

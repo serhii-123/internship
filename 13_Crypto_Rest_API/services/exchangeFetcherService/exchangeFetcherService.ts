@@ -4,6 +4,8 @@ import ExchangeRateModel from "./types/exchangeRateModel";
 import CurrencyModel from './types/currencyModel';
 import MarketModel from './types/marketModel';
 import ReceivingTimestampModel from './types/receivingTimestampModel';
+import Currency from './types/currency';
+import Market from './types/market';
 
 class ExchangeFetcherService {
     constructor(
@@ -22,6 +24,7 @@ class ExchangeFetcherService {
         
         await this.fetchFromCoinMarketCap(coinMarketApiKey, timestampId);
         await this.fetchFromCoinStats(coinStatsApiKey, timestampId);
+        await this.fetchFromCoinPaprika(timestampId);
     }
 
     private async fetchFromCoinMarketCap(
@@ -39,18 +42,7 @@ class ExchangeFetcherService {
         });
         const cryptoData = res.data.data;
 
-        for(let o of cryptoData) {
-            const symbol: string = o.symbol;
-            const currency = await this.currencyModel.getCurrencyByName(symbol);
-
-            if(!currency) continue;
-
-            const priceInUsd: string = o.quote.USD.price.toString();
-
-            await this.exchangeRateModel.insertExchangeRate(
-                currency.id, market.id, priceInUsd, timestampId
-            );
-        }
+        await this.processCryptoData(cryptoData, market, timestampId);
     }
 
     private async fetchFromCoinStats(apiKey: string, timestampId: number): Promise<void> {
@@ -64,19 +56,61 @@ class ExchangeFetcherService {
             headers: { 'X-API-KEY': apiKey }
         });
         const cryptoData = res.data.result;
+        
+        await this.processCryptoData(cryptoData, market, timestampId);
+    }
 
-        for(let o of cryptoData) {
-            const symbol: string = o.symbol;
-            const currency = await this.currencyModel.getCurrencyByName(symbol);
+    private async fetchFromCoinPaprika(timestampId: number) {
+        const marketName = 'coinpaprika';
+        const url = 'https://api.coinpaprika.com/v1/tickers';
+        const market = await this.marketModel.getMarketByName(marketName);
+
+        if(!market) throw new Error('No market found by given name');
+
+        const res = await axios.get(url);
+        const cryptoData = res.data;
+
+        await this.processCryptoData(cryptoData, market, timestampId);
+    }
+
+    private async processCryptoData(data: any, market: Market, timestampId: number): Promise<void> {
+        for(let o of data) {
+            const currency = await this.findCurrency(o);
 
             if(!currency) continue;
 
-            const priceInUsd: string = await o.price;
+            const priceInUsd: string = await this.getPriceInUsd(o, market.name);
 
-            await this.exchangeRateModel.insertExchangeRate(
-                currency.id, market.id, priceInUsd, timestampId
-            );
+            await this.saveExchangeRate(currency.id, market.id, priceInUsd, timestampId);
         }
+    }
+
+    private async getPriceInUsd(o: any, market: string): Promise<string> {
+        switch(market.toLowerCase()) {
+            case 'coinmarketcap':
+                return o.quote.USD.price.toString();
+            case 'coinstats':
+                return o.price.toString();
+            case 'coinpaprika':
+                return o.quotes.USD.price;
+            default:
+                return '';
+        }
+    }
+
+    private async saveExchangeRate(currencyId: number, marketId: number, priceInUsd: string, timestampId: number) {
+        try {
+            await this.exchangeRateModel.insertExchangeRate(
+                currencyId, marketId, priceInUsd, timestampId
+            );
+        } catch(e) {}
+    }
+
+    private async findCurrency(o: { symbol: string }): Promise<Currency | null> {
+        const symbol: string = o.symbol;
+        const currency = await this.currencyModel.getCurrencyByName(symbol);
+
+        return currency;
     }
 }
 
