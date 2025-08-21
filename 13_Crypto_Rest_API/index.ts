@@ -39,7 +39,7 @@ async function start() {
     });
 
     new CronJob(
-        '0 5 * * * *',
+        '0 */5 * * * *',
         async () => {
             console.log('Cron started');
             await exchangeFetcherService.fetchData(

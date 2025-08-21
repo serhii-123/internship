@@ -1,0 +1,22 @@
+import axios from "axios";
+import { CurrencyData } from "./types/currency-data";
+
+class CurrencyFetcherService {
+    constructor(
+        private readonly baseUrl: string  
+    ) {}
+
+    async getCurrencyData(name: string, period?: string): Promise<CurrencyData[]> {
+        let url = `${this.baseUrl}/currency?currency=${name}`;
+
+        if(period)
+            url = `${url}&period=${period}`;
+
+        const res = await axios.get(url);
+        const result = res.data;
+
+        return result;
+    }
+}
+
+export default CurrencyFetcherService;
