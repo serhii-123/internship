@@ -1,7 +1,7 @@
 import { Hono } from "hono";
 import { serve } from "@hono/node-server";
 import { CronJob } from 'cron';
-import ExchangeController from "./controllers/exhcange/exchangeController";
+import ExchangeController from "./controllers/exchange/exchangeController";
 import ExchangeProviderService from "./services/exchageProviderService/exchangeProviderService";
 import ExchangeRateModel from "./models/exchangeRateModel/exchangeRateModel";
 import { connectDB } from "./db";
@@ -31,6 +31,7 @@ async function start() {
     const exchangeController = new ExchangeController(exchangeProviderService);
 
     hono.get('/currency', async c => await exchangeController.sendRate(c));
+    hono.get('/currency/by-date', async c => await exchangeController.sendRateByDate(c));
 
     serve({
         fetch: hono.fetch,

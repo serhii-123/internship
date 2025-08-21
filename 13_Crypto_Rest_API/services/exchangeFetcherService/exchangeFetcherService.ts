@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { format } from 'date-fns';
+import { formatInTimeZone } from 'date-fns-tz'
 import ExchangeRateModel from "./types/exchangeRateModel";
 import CurrencyModel from './types/currencyModel';
 import MarketModel from './types/marketModel';
@@ -19,7 +20,7 @@ class ExchangeFetcherService {
         coinMarketApiKey: string,
         coinStatsApiKey: string
     ) {
-        const timestamp = format(new Date(), 'yyyy-MM-dd HH:mm:ss');
+        const timestamp = formatInTimeZone(new Date(), 'UTC', 'yyyy-MM-dd HH:mm:ss');
         const timestampId = await this.receivingTimestampModel.insertReceivingTimestamp(timestamp)
         
         await this.fetchFromCoinMarketCap(coinMarketApiKey, timestampId);

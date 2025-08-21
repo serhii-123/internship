@@ -1,6 +1,6 @@
 import { MySql2Database } from "drizzle-orm/mysql2";
 import { currencies, exchangeRates, markets, receivingTimestamps } from "../../db/schema";
-import { and, eq, gte, desc, avg } from "drizzle-orm";
+import { and, eq, gte, desc, avg, asc } from "drizzle-orm";
 
 class ExchangeRateModel {
     constructor(
@@ -16,6 +16,29 @@ class ExchangeRateModel {
         } else {
             return await this.getExchangeRateDataWithAveragePrice(currencyId, marketIdOrPeriod);
         }
+    }
+
+    async getFirstRowAfterDate(
+        currencyId: number,
+        date: string
+    ): Promise<any> {
+        const result = await this.db
+            .select({
+                priceInUsd: avg(exchangeRates.priceInUsd),
+                receivedAt: receivingTimestamps.timestamp
+            }).from(exchangeRates)
+            .innerJoin(currencies, eq(exchangeRates.currencyId, currencies.id))
+            .innerJoin(receivingTimestamps, eq(exchangeRates.receivingTimestampId, receivingTimestamps.id))
+            .where(
+                and(
+                    eq(currencies.id, currencyId),
+                    gte(receivingTimestamps.timestamp, date)
+                )
+            ).groupBy(currencies.name, receivingTimestamps.timestamp)
+            .orderBy(asc(receivingTimestamps.timestamp))
+            .limit(1);
+
+        return result;
     }
 
     async insertExchangeRate(
@@ -42,8 +65,7 @@ class ExchangeRateModel {
                     eq(currencies.id, currencyId),
                     period ? gte(receivingTimestamps.timestamp, period) : undefined
                 )
-            )
-            .groupBy(currencies.name, receivingTimestamps.timestamp)
+            ).groupBy(currencies.name, receivingTimestamps.timestamp)
             .orderBy(desc(receivingTimestamps.timestamp));
 
         return result;

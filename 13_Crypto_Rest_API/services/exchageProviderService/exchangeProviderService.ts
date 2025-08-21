@@ -1,7 +1,7 @@
 import { ExchangeRateModel, CurrencyModel, MarketModel, Market } from './types';
 import { format } from 'date-fns';
 
-class ExchangeService {
+class ExchangeProviderService {
     constructor(
         private readonly exchangeRateModel: ExchangeRateModel,
         private readonly currencyModel: CurrencyModel,
@@ -43,6 +43,24 @@ class ExchangeService {
         return exchangeRateData;
     }
 
+    async getCurrencyRecordByDate(
+        currency: string,
+        date: string,
+    ): Promise<any> {
+        const currencyObj = await this
+            .currencyModel
+            .getCurrencyByName(currency);
+
+        if(!currencyObj) throw new Error('Cannot find currency');
+
+        const formattedDate = date.replace('T', ' ');
+        const exchangeRateData = await this
+            .exchangeRateModel
+            .getFirstRowAfterDate(currencyObj.id, formattedDate);
+
+        return exchangeRateData;
+    }
+
     private async getPeriodDate(period: string): Promise<string> {
         const lastIndex = period.length - 1;
         const unit = period[lastIndex];
@@ -62,4 +80,4 @@ class ExchangeService {
     }
 }
 
-export default ExchangeService;
+export default ExchangeProviderService;
