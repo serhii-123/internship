@@ -5,4 +5,5 @@ export type Currency = {
 
 export interface CurrencyModel {
     getCurrencies(): Promise<Currency[]>
+    getCurrencyByName(name: string): Promise<Currency | null>
 }

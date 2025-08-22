@@ -17,6 +17,14 @@ class CurrencyFetcherService {
 
         return result;
     }
+
+    async getCurrencyRecordByDate(name: string, date: string) {
+        const url = `${this.baseUrl}/currency/by-date?currency=${name}&date=${date}`;
+        const res = await axios.get(url);
+        const result = res.data;
+
+        return result;
+    }
 }
 
 export default CurrencyFetcherService;

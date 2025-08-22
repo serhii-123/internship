@@ -5,4 +5,5 @@ export type CurrencyData = {
 
 export interface CurrencyFetcherService {
     getCurrencyData: (name: string, period?: string) => Promise<CurrencyData[]>
+    getCurrencyRecordByDate: (name: string, date: string) => Promise<CurrencyData[]>
 }
