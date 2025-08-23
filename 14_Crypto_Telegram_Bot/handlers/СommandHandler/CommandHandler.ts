@@ -1,4 +1,4 @@
-import { Context } from "grammy";
+import { Context, InlineKeyboard, Keyboard } from "grammy";
 import { formatInTimeZone } from 'date-fns-tz';
 import { CurrencyModel } from "./types/currency-model";
 import { CurrencyFetcherService } from "./types/currency-fetcher-service";
@@ -47,8 +47,12 @@ class CommandsHandler {
             }
             
             const answer = await this.getAnswerForSpecificCurrency(currencyName);
-
-            ctx.reply(answer);
+            const keyboard = new InlineKeyboard()
+                .text('Add to following', currencyName)
+                .text('Remove from following', currencyName);
+            ctx.reply(answer, {
+                reply_markup: keyboard
+            });
         } catch(e) {
             if(e instanceof Error) {
                 console.log(e.message);
@@ -83,7 +87,9 @@ class CommandsHandler {
             const timeInMs = currentDate.getTime() - timePointsOffsets[timePoint];
             const timePointDate = new Date(timeInMs);
             const timestamp = formatInTimeZone(timePointDate, 'UTC', "yyyy-MM-dd'T'HH:mm:ss'Z'");
-            const response = await this.currencyFetcherService.getCurrencyRecordByDate(currencyName, timestamp);
+            const response = await this.
+                currencyFetcherService
+                .getCurrencyRecordByDate(currencyName, timestamp);
             const formattedPrice = await this.formatPrice(response[0].priceInUsd);
             const answerPart = `${timePoint} - ${formattedPrice} USD\n`;
             answer += answerPart;
