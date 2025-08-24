@@ -8,6 +8,7 @@ import CurrencyModel from './models/CurrencyModel/CurrencyModel';
 import CommandsHandler from './handlers/СommandHandler/CommandHandler';
 import CallbackQueryHandler from './handlers/CallbackQueryHandler/CallbackQueryHandler';
 import UserModel from './models/UserModel/UserModel';
+import FollowingCurrencyModel from './models/FollowingCurrencyModel/FollowingCurrencyModel';
 
 async function start() {
     const bot = new Bot(BOT_TOKEN);
@@ -16,17 +17,18 @@ async function start() {
 
     const currencyModel = new CurrencyModel(db);
     const userModel = new UserModel(db);
+    const followingCurrencyModel = new FollowingCurrencyModel(db);
 
     const currencyFetcherService = new CurrencyFetcherService(BASE_API_URL);
 
     const commandHandler = new CommandsHandler(currencyFetcherService, currencyModel);
-    const callbackQueryHandler = new CallbackQueryHandler(currencyModel, userModel);
+    const callbackQueryHandler = new CallbackQueryHandler(currencyModel, userModel, followingCurrencyModel);
 
-    bot.command('start', async ctx => ctx.reply(START_TEXT));
-    bot.command('help', async ctx => ctx.reply(HELP_TEXT));
-    bot.command('list_recent', async ctx => commandHandler.handleListRecent(ctx));
-    bot.callbackQuery('Add to following', async ctx => );
-    bot.callbackQuery('Remove from following');
+    bot.command('start', async c => c.reply(START_TEXT));
+    bot.command('help', async c => c.reply(HELP_TEXT));
+    bot.command('list_recent', async c => commandHandler.handleListRecent(c));
+    bot.callbackQuery(/^add-[A-Za-z]{3,5}$/, async c => callbackQueryHandler.handleAddToFollowing(c));
+    bot.callbackQuery(/^add-[A-Za-z]{3,5}$/, async c => callbackQueryHandler.handleRemoveFromFollowing(c));
     bot.hears(/^\/[A-Za-z]{3,5}$/, async ctx => commandHandler.handleSpecificCurrency(ctx));
 
     bot.start();

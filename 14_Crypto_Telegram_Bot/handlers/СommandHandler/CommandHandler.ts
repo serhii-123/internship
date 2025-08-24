@@ -48,8 +48,8 @@ class CommandsHandler {
             
             const answer = await this.getAnswerForSpecificCurrency(currencyName);
             const keyboard = new InlineKeyboard()
-                .text('Add to following', currencyName)
-                .text('Remove from following', currencyName);
+                .text('Add to following', `add-${currencyName}`)
+                .text('Remove from following', `remove_${currencyName}`);
             ctx.reply(answer, {
                 reply_markup: keyboard
             });
