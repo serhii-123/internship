@@ -1,5 +1,5 @@
 import { MySql2Database } from "drizzle-orm/mysql2";
-import { followingCurrencies } from "../../db/schema";
+import { currencies, followingCurrencies, users } from "../../db/schema";
 import { and, eq } from "drizzle-orm";
 
 class FollowingCurrencyModel {
@@ -34,6 +34,18 @@ class FollowingCurrencyModel {
         const { affectedRows } = result[0];
 
         return affectedRows;
+    }
+
+    async getCurrencyNamesByUserId(userId: number) {
+        const result = await this.db
+            .select({
+                name: currencies.name
+            }).from(followingCurrencies)
+            .innerJoin(currencies, eq(followingCurrencies.currencyId, currencies.id))
+            .innerJoin(users, eq(followingCurrencies.userId, users.id))
+            .where(eq(users.userId, userId));
+        
+        return result;
     }
 }
 

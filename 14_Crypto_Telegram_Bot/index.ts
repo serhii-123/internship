@@ -21,15 +21,20 @@ async function start() {
 
     const currencyFetcherService = new CurrencyFetcherService(BASE_API_URL);
 
-    const commandHandler = new CommandsHandler(currencyFetcherService, currencyModel);
+    const commandHandler = new CommandsHandler(currencyFetcherService, currencyModel, userModel, followingCurrencyModel);
     const callbackQueryHandler = new CallbackQueryHandler(currencyModel, userModel, followingCurrencyModel);
 
     bot.command('start', async c => c.reply(START_TEXT));
     bot.command('help', async c => c.reply(HELP_TEXT));
     bot.command('list_recent', async c => commandHandler.handleListRecent(c));
+    bot.command('list_favourite', async c => commandHandler.handleListFavourite(c));
+
     bot.callbackQuery(/^add-[A-Za-z]{3,5}$/, async c => callbackQueryHandler.handleAddToFollowing(c));
-    bot.callbackQuery(/^add-[A-Za-z]{3,5}$/, async c => callbackQueryHandler.handleRemoveFromFollowing(c));
-    bot.hears(/^\/[A-Za-z]{3,5}$/, async ctx => commandHandler.handleSpecificCurrency(ctx));
+    bot.callbackQuery(/^remove-[A-Za-z]{3,5}$/, async c => callbackQueryHandler.handleRemoveFromFollowing(c));
+    
+    bot.hears(/^\/[A-Za-z]{3,5}$/, async c => commandHandler.handleSpecificCurrency(c));
+    bot.hears(/^\/add_to_favourite [A-Za-z]{3,5}$/, async c => commandHandler.handleAddToFavourite(c));
+    bot.hears(/^\/delete_favourite [A-Za-z]{3,5}$/, async c => commandHandler.handlDeleteFavourite(c));
 
     bot.start();
 }

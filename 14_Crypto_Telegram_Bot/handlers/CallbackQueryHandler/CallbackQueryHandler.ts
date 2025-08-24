@@ -49,11 +49,10 @@ class CallbackQueryHandler {
                     contextData.currencyId, 
                     contextData.dbUserId
                 );
-
-            if(affectedRows === 0)
+            if(affectedRows === 1)
                 ctx.reply('Currency successfully removed from the following');
             else
-                ctx.reply('You did not have this currency in your list');
+                ctx.reply('You did not have this currency in your following list');
         } catch(e) {
             if(e instanceof Error)
                 ctx.reply('Something went wrong. Please, try again later');
@@ -62,7 +61,7 @@ class CallbackQueryHandler {
 
     private async resolveContextData(ctx: Context): Promise<{
         currencyId: number,
-        dbUserId: number
+        dbUserId: number,
     } | null> {
         const callbackData = ctx.callbackQuery?.data;
 
@@ -71,7 +70,8 @@ class CallbackQueryHandler {
             return null;
         }
 
-        const currencyName = callbackData.slice(4);
+        const hyphenIndex = callbackData.indexOf('-');
+        const currencyName = callbackData.slice(hyphenIndex + 1);
         const currency = await this.currencyModel.getCurrencyByName(currencyName);
 
         if(!currency) {
