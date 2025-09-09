@@ -22,10 +22,11 @@ class ExchangeController {
             return c.json(responseData);
         } catch(e) {
             console.log(e);
+
             if(e instanceof ZodError)
-                return c.body('Bad request', 401);
+                return c.json({ message: 'Bad request' }, 401);
             if(e instanceof Error)
-                return c.body('Something went wrong', 400);
+                return c.json({ message: 'Something went wrong' }, 400);
         }
     }
 
@@ -41,9 +42,9 @@ class ExchangeController {
             return c.json(responseData);
         } catch(e) {
             if(e instanceof ZodError)
-                return c.body('Bad request', 400);
+                return c.json({ message: 'Bad request' }, 400);
             if(e instanceof Error)
-                return c.body('Something went wrong', 400);
+                return c.json({ message: 'Something went wrong' }, 400);
         }
     }
 }

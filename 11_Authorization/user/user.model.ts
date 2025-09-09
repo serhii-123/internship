@@ -2,12 +2,10 @@ import { Collection, Db } from "mongodb";
 import { NewUserDb, UserDb, UserOutput } from "./user.type";
 
 class UserModel {
-    private db: Db;
     private collection: Collection<UserDb>;
 
     constructor(db: Db) {
-        this.db = db;
-        this.collection = db.collection('users')
+        this.collection = db.collection('users');
     }
 
     async createUser(email: string, passwordHash: string): Promise<string> {
@@ -18,10 +16,10 @@ class UserModel {
         return id;
     }
 
-    async getUserByEmail(email: string): Promise<UserOutput | undefined> {
+    async getUserByEmail(email: string): Promise<UserOutput | null> {
         const doc = await this.collection.findOne({ email });
         
-        if(!doc) return undefined;
+        if(!doc) return null;
 
         const user = await this.convertUser(doc);
 
@@ -33,7 +31,7 @@ class UserModel {
             id: doc._id.toString(),
             email: doc.email,
             passwordHash: doc.passwordHash
-        }
+        };
 
         return user;
     }

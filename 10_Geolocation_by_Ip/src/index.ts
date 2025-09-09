@@ -3,7 +3,7 @@ import { serve } from '@hono/node-server';
 import { getConnInfo } from '@hono/node-server/conninfo';
 import { config } from 'dotenv';
 import IPService from './IPService';
-import ipScheme from './schemes';
+import ipScheme from './schemas';
 
 config({ path: '../.env' });
 
@@ -25,18 +25,17 @@ async function start(ipFileName: string, port: number = 3000) {
         try {
             await ipScheme.parseAsync(ip);
         } catch {
-            c.status(400)
-            
-            return c.text(`Failed to obtain IP address or it is invalid`);
+            return c.json({
+                message: `Failed to obtain IP address or it is invalid`
+            }, 400);
         }   
 
         const country = await ipService.getCountryByIP(ip);
 
-        if(!country) {
-            c.status(204);
-            
-            return c.text('There\'s no country for this IP')
-        }
+        if(!country)
+            return c.json({
+                message: 'Country not found for this IP'
+            },404);
 
         const responseJson = { country, ip }
         

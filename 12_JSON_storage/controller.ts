@@ -1,6 +1,6 @@
 import { Context } from "hono";
 import { MongoServerError } from "mongodb";
-import _ from "lodash";
+import { isEmpty } from "lodash";
 import Model from "./model";
 
 class Controller {
@@ -14,21 +14,24 @@ class Controller {
             const contentType = c.req.header('Content-Type');
             
             if(!body || ( contentType !== 'application/json' ))
-                return c.body('Bad request', 400);
+                return c.json({ message: 'Bad request' }, 400);
 
-            if(_.isEmpty(body))
-                return c.body('Request body cannot be empty', 400);
+            if(isEmpty(body))
+                return c.json({ message: 'Request body cannot be empty' }, 400);
 
             await this.model.insertDoc(body);
 
             return c.body('OK');
         } catch(e) {
             console.log(e);
+
             if(e instanceof MongoServerError)
                 if(e.code === 11000)
-                    return c.body(`A document for the specified path already exists`, 409);
+                    return c.json({
+                        message: `A document for the specified path already exists`
+                    }, 409);
                 else
-                    return c.body('Server error', 500);
+                    return c.json({ message: 'Server error' }, 500);
         }
     }
 
@@ -39,8 +42,7 @@ class Controller {
             
             return c.json(doc ? doc : {}, 200);
         } catch(e) {
-            if(e instanceof MongoServerError)
-                return c.body('Server error', 500);
+            return c.json({ message: 'Server error' }, 500);
         }
     }
 }

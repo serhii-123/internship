@@ -20,14 +20,11 @@ async function start(url: string, ips) {
             it(`Should return the "${country}" country`, async () => {
                 const ip = ips[country];
                 const req = await axios.get(`${url}/country`, {
-                    headers: {
-                        'x-forwarded-for': ip
-                    }
+                    headers: { 'x-forwarded-for': ip }
                 });
                 const body = req.data;
                 const expectedObj = {
-                    country,
-                    ip
+                    country, ip
                 };
 
                 expect(body).toEqual(expectedObj);

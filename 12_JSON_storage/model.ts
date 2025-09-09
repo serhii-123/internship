@@ -3,9 +3,7 @@ import Doc from "./types/doc";
 
 class Model {
     private readonly collection: Collection<Doc>
-    constructor(
-        private readonly db: Db
-    ) {
+    constructor(db: Db) {
         this.collection = db.collection('docs');
     }
 
