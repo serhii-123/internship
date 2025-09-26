@@ -1,0 +1,137 @@
+service: image-storage-api
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: eu-central-1
+
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - cognito-idp:SignUp
+            - cognito-idp:InitiateAuth
+            - cognito-idp:RespondToAuthChallenge
+            - cognito-idp:AdminConfirmSignUp
+            - dynamodb:PutItem
+            - dynamodb:DeleteItem
+            - s3:PutObject
+            - s3:ListBucket
+            - s3:GetObject
+            - s3:DeleteObject
+          Resource: "*"
+
+  environment:
+    TABLE_NAME: ${self:service}-table-${sls:stage}
+    BUCKET_NAME: ${self:service}-bucket-${sls:stage}
+    USER_POOL_ID: !Ref CognitoUserPool
+    USER_POOL_CLIENT_ID: !Ref CognitoUserPoolClient
+
+  httpApi:
+    cors:
+      allowedOrigins:
+        - '*'
+      allowedMethods:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+      allowedHeaders:
+        - Authorization
+        - Content-Type
+    authorizers:
+      jwtAuth:
+        type: jwt
+        identitySource: "$request.header.Authorization"
+        issuerUrl: 
+          Fn::Sub: https://cognito-idp.${AWS::Region}.amazonaws.com/${CognitoUserPool}
+        audience:
+          - Ref: CognitoUserPoolClient
+
+functions:
+  register:
+    handler: dist/auth.register
+    events:
+      - httpApi:
+          path: /auth/register
+          method: post
+
+  login:
+    handler: dist/auth.login
+    events:
+      - httpApi:
+          path: /auth/login
+          method: post
+
+  refresh:
+    handler: dist/auth.refresh
+    events:
+      - httpApi:
+          path: /auth/refresh
+          method: post
+
+  uploadImage:
+    handler: dist/images.uploadImage
+    events:
+      - httpApi:
+          path: /images/upload
+          method: post
+          authorizer:
+            name: jwtAuth
+
+  listImages:
+    handler: dist/images.listImages
+    events:
+      - httpApi:
+          path: /images/list-all
+          method: get
+          authorizer:
+            name: jwtAuth
+
+  deleteImage:
+    handler: dist/images.deleteImage
+    events:
+      - httpApi:
+          path: /images/{key}
+          method: delete
+          authorizer:
+            name: jwtAuth
+
+resources:
+  Resources:
+    ImagesBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:provider.environment.BUCKET_NAME}
+
+    CognitoUserPool:
+      Type: AWS::Cognito::UserPool
+      Properties:
+        UserPoolName: ${self:service}-user-pool
+
+    CognitoUserPoolClient:
+      Type: AWS::Cognito::UserPoolClient
+      Properties:
+        ClientName: ${self:service}-user-pool-client
+        UserPoolId: !Ref CognitoUserPool
+        GenerateSecret: false
+        ExplicitAuthFlows:
+          - ALLOW_USER_PASSWORD_AUTH
+          - ALLOW_REFRESH_TOKEN_AUTH
+          - ALLOW_USER_SRP_AUTH
+    ImagesTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:provider.environment.TABLE_NAME}
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+        - AttributeName: userId
+          AttributeType: S
+        - AttributeName: objectKey
+          AttributeType: S
+        KeySchema:
+        - AttributeName: userId
+          KeyType: HASH
+        - AttributeName: objectKey
+          KeyType: RANGE

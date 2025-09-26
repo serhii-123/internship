@@ -1,0 +1,24 @@
+{
+  "name": "photo-service",
+  "version": "1.0.0",
+  "description": "<!-- title: 'AWS NodeJS Example' description: 'This template demonstrates how to deploy a simple NodeJS function running on AWS Lambda using the Serverless Framework.' layout: Doc framework: v4 platform: AWS language: nodeJS priority: 1 authorLink: 'https://github.com/serverless' authorName: 'Serverless, Inc.' authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4' -->",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@aws-sdk/client-cognito-identity-provider": "^3.879.0",
+    "@aws-sdk/client-dynamodb": "^3.879.0",
+    "@aws-sdk/s3-presigned-post": "^3.879.0",
+    "@aws-sdk/s3-request-presigner": "^3.879.0",
+    "@types/aws-lambda": "^8.10.152",
+    "@types/node": "^24.3.0",
+    "aws-lambda": "^1.0.7",
+    "serverless": "^4.19.1",
+    "typescript": "^5.9.2"
+  }
+}

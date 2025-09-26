@@ -1,0 +1,15 @@
+org: gachi
+service: my-service
+frameworkVersion: "4"
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+
+functions:
+  hello:
+    handler: handler.getMessage
+    events:
+      - httpApi:
+          path: /
+          method: get
