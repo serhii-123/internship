@@ -1,12 +1,11 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import AccountPage from './components/AccountPage/AccountPage';
-import AuthForm from './components/AuthForm/AuthForm';
 import './App.css';
 import SignInRoute from './components/SignInRoute/SignInRoute';
 import SignUpRoute from './components/SignUpRoute/SignUpRoute';
 
 function App() {
-  const onLoginClick = (email: string, password: string) => {
+  const onSignInClick = (email: string, password: string) => {
     console.log(email, password);
   }
 
@@ -24,12 +23,14 @@ function App() {
           <Route
             path="/sign-in"
             element={
-              <SignInRoute />
+              <SignInRoute
+                onSubmitClick={onSignInClick} />
             } />
           <Route
             path="/sign-up"
             element={
-             <SignUpRoute />
+              <SignUpRoute
+                onSubmitClick={onSignUpClick} />
             } />
         </Routes>
       </Router>

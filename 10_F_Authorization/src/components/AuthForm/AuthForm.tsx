@@ -7,7 +7,7 @@ type LinkType = FormType;
 interface AuthFormProps {
     type: FormType;
     onSubmitClick: (email: string, password: string) => any;
-    onLinkClick?: (type: FormType) => any;
+    onLinkClick: (type: FormType) => any;
 }
 
 function AuthForm(props: AuthFormProps) {
@@ -47,15 +47,17 @@ function AuthForm(props: AuthFormProps) {
         {props.type === 'signIn' ?
             (
                 <p className="auth-form__text">
-                    Don't have an account?
+                    <span>Don't have an account? </span>
                     <button
+                        className="auth-form__link"
                         type="button"
                         onClick={() => onLinkClick('signUp')}>Sign Up</button>
                 </p>
             ): (
                 <p className="auth-form__text">
-                    Already have an account?
+                    <span>Already have an account? </span>
                     <button
+                        className="auth-form__link"
                         type="button"
                         onClick={() => onLinkClick('signIn')}>Sign in</button>
                 </p>

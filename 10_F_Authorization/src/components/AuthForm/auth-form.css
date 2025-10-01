@@ -30,6 +30,7 @@
 .auth-form__btn {
     width: 100%;
     padding: 15px;
+    margin-bottom: 20px;
     background-color: rgb(255, 255, 255);
     font-size: 16px;
     font-weight: 600;
@@ -37,4 +38,18 @@
     border: none;
     border-radius: 8px;
     cursor: pointer;
+}
+
+.auth-form__text {
+    text-align: center;
+    color: rgb(255, 255, 255);
+}
+
+.auth-form__link {
+    border: none;
+    font-size: 16px;
+    color: rgb(255, 255, 255);
+    text-decoration: underline;
+    font-weight: 600;
+    background-color: rgba(0, 0, 0, 0);
 }

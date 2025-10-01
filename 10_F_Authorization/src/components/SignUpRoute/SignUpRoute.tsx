@@ -1,13 +1,17 @@
 import { useNavigate } from "react-router-dom";
 import AuthForm from "../AuthForm/AuthForm";
 
-function SignUpRoute() {
+type SignUpRouteProps = {
+    onSubmitClick: (email: string, password: string) => any;
+}
+
+function SignUpRoute(props: SignUpRouteProps) {
     const navigate = useNavigate();
 
     return <AuthForm
-                type="signUp"
-                onLinkClick={(type) => navigate(type === 'signIn' ? '/sign-in' : '/sign-up')}
-                onSubmitClick={(email, password) => console.log(email, password)} />;
+        type="signUp"
+        onLinkClick={(type) => navigate(type === 'signIn' ? '/sign-in' : '/sign-up')}
+        onSubmitClick={props.onSubmitClick} />;
 }
 
 export default SignUpRoute;
