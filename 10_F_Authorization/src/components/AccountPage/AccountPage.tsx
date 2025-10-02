@@ -7,9 +7,9 @@ type AccountPageProps = {
 
 function AccountPage({ username, number }: AccountPageProps) {
     return <div className="account-page">
-        <h1>Account Page</h1>
-        <p>Your username: {username}</p>
-        <p>Given number: {number}</p>
+        <h1 className="account-page__heading">Account Page</h1>
+        <p className="account-page__text">Your username: {username}</p>
+        <p className="account-page__text">Given number: {number}</p>
     </div>;
 }
  

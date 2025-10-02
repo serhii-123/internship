@@ -1,10 +1,27 @@
 .account-page {
-        width: 320px;
-        height: 200px;
-        border-radius: 5px;
-        padding: 20px;
-        border: 1px solid rgb(255, 255, 255);
-        border-radius: 10px;
-        background: rgba(255, 255, 255, 0.2);
-        backdrop-filter: blur(10px);
+    width: 320px;
+    height: 200px;
+    border-radius: 5px;
+    padding: 20px;
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.account-page__heading {
+    margin-bottom: 15px;
+    font-size: 36px;
+    text-align: center;
+    color: rgb(255, 255, 255);
+}
+
+.account-page__text {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: rgb(255, 255, 255);
+}
+
+.account-page__text:last-child {
+    margin-bottom: 0;
 }

@@ -1,19 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
+import type { AccessTokenPayload, SignInResponse } from './types';
 import AccountPage from './components/AccountPage/AccountPage';
 import AuthForm from './components/AuthForm/AuthForm';
 import saveTokensInStorage from './utils/saveTokensInStorage';
 import './App.css';
-
-type AccessTokenPayload = {
-  email: string,
-};
-
-type SignInResponse = {
-  access_token: string,
-  refresh_token: string,
-};
 
 function App() {
   const navigate = useNavigate();
@@ -60,9 +52,8 @@ function App() {
 
       setStates(email, 3, true);
       navigate('/me');
-    } else {
+    } else
       signInFormRef.current?.showErrorMessage('Invalid email or password');
-    }
   }
 
   const onSignUpClick = (email: string, password: string) => {
