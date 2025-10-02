@@ -8,6 +8,7 @@ import AccountPage from './components/AccountPage/AccountPage';
 import AuthForm from './components/AuthForm/AuthForm';
 import saveTokensInStorage from './utils/saveTokensInStorage';
 import './App.css';
+import Fetcher from './classes/Fetcher';
 
 function App() {
   const navigate = useNavigate();
@@ -37,42 +38,27 @@ function App() {
   }, []);
 
   const onSignInClick = async (email: string, password: string) => {
-    const loginUrl = `http://localhost:3000/login?email=${email}&password=${password}`;
-    const response = await fetch(loginUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-    });
-
+    const response = await Fetcher.makeSignInRequest(email, password);
     const status = response.status;
     
-    if(status === 200) {
-      const data = await response.json();
-      const { access_token, refresh_token } = data as SignInResponse;
-      
-      await saveTokensInStorage(access_token, refresh_token);
-      
-      const payload = jwtDecode(access_token) as AccessTokenPayload;
-      const { email } = payload;
-
-      setStates(email, 3, true);
-      navigate('/me');
-    } else
+    if(status === 200)
+      processSuccessfulAuthRequest(response);
+    else
       signInFormRef.current?.showErrorMessage('Invalid email or password');
   }
 
   const onSignUpClick = async (email: string, password: string) => {
-    const signUpUrl = `http://localhost:3000/sign_up`;
-    const requestBody = { email, password };
-    const response = await fetch(signUpUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(requestBody)
-    });
+    const response = await Fetcher.makeSignUpRequest(email, password);
     const status = response.status;
 
-    if(status === 200) {
-      const data = await response.json();
-      console.log(data);
+    if(status === 200) 
+      processSuccessfulAuthRequest(response)
+    else
+      signUpFormRef.current?.showErrorMessage('User with this email already exists');
+  }
+
+  const processSuccessfulAuthRequest = async (response: Response) => {
+    const data = await response.json();
       const { access_token, refresh_token } = data as SignInResponse;
 
       await saveTokensInStorage(access_token, refresh_token);
@@ -82,8 +68,6 @@ function App() {
 
       setStates(email, 1, true);
       navigate('/me');
-    } else
-      signUpFormRef.current?.showErrorMessage('User with this email already exists');
   }
 
   const setStates = (username: string, number: number, authorized: boolean) => {
