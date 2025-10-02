@@ -1,20 +1,35 @@
-import { useState } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import './auth-form.css';
 
 type FormType = 'signIn' | 'signUp';
 type LinkType = FormType;
 
-interface AuthFormProps {
+type ForwardRefBody = {
+    showErrorMessage: (msg: string) => void;
+};
+
+type AuthFormProps = {
     type: FormType;
     onSubmitClick: (email: string, password: string) => any;
     onLinkClick: (type: FormType) => any;
-}
+};
 
-function AuthForm(props: AuthFormProps) {
+function AuthForm(props: AuthFormProps, ref: any) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [label] = useState(props.type === 'signIn' ? 'Sign In' : 'Sign Up');
+    const [label, setLabel] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
+    useImperativeHandle(ref, () => ({
+        showErrorMessage: (msg: string) => {
+            setErrorMessage(msg);
+        }
+    }));
+
+    useEffect(() => {
+        setLabel(props.type === 'signIn' ? 'Sign In' : 'Sign Up'    )
+    }, [props.type]);
+    
     const onLinkClick = (type: LinkType) => {
         if (props.onLinkClick)
             props.onLinkClick(type);
@@ -62,8 +77,10 @@ function AuthForm(props: AuthFormProps) {
                         onClick={() => onLinkClick('signIn')}>Sign in</button>
                 </p>
             ) }
+        
+        {errorMessage && <p className="auth-form__error">{errorMessage}</p>}
 
     </form>;
 }
 
-export default AuthForm;
+export default forwardRef<ForwardRefBody, AuthFormProps>(AuthForm);

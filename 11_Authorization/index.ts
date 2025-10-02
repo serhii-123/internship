@@ -1,4 +1,5 @@
 import { Hono } from 'hono'
+import { cors } from 'hono/cors'
 import { serve } from '@hono/node-server'
 import * as env from './config/env';
 import UserModel from './user/user.model';
@@ -25,6 +26,12 @@ async function start() {
     const dataController = new DataController(jwtService);
 
     const app = new Hono();
+
+    app.use('*', cors({
+        origin: 'http://localhost:5173',
+        allowMethods: ['GET', 'POST'],
+        allowHeaders: ['Content-Type', 'Authorization'],
+    }));
 
     app.post('/sign_up', c => authController.signUp(c));
     app.post('/login', c => authController.login(c));

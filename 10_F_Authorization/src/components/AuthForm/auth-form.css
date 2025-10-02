@@ -53,3 +53,10 @@
     font-weight: 600;
     background-color: rgba(0, 0, 0, 0);
 }
+
+.auth-form__error {
+    color: rgb(255, 100, 100);
+    text-align: center;
+    margin-top: 20px;
+    font-size: 16px;
+}

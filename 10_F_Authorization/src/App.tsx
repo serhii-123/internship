@@ -1,64 +1,67 @@
-import { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import jwt from 'jsonwebtoken';
+import { useEffect, useRef, useState } from 'react';
+import { Route, Routes, useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 import AccountPage from './components/AccountPage/AccountPage';
-import SignInRoute from './components/SignInRoute/SignInRoute';
-import SignUpRoute from './components/SignUpRoute/SignUpRoute';
+import AuthForm from './components/AuthForm/AuthForm';
 import saveTokensInStorage from './utils/saveTokensInStorage';
 import './App.css';
 
 type AccessTokenPayload = {
-  username: string,
-  number: number,
-}
+  email: string,
+};
 
 type SignInResponse = {
-  accessToken: string,
-  refreshToken: string,
-}
+  access_token: string,
+  refresh_token: string,
+};
 
 function App() {
+  const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [number, setNumber] = useState(0);
   const [authorized, setAuthorized] = useState(false);
+
+  const signUpFormRef = useRef<{ showErrorMessage: (msg: string) => void }>(null);
+  const signInFormRef = useRef<{ showErrorMessage: (msg: string) => void }>(null);
 
   useEffect(() => {
     const accessJwt = localStorage.getItem('accessJwt');
     
     if(accessJwt) {
-      const payload = jwt.decode(accessJwt) as AccessTokenPayload;
+      const payload = jwtDecode(accessJwt) as AccessTokenPayload;
 
       if(payload) {
-        const { username, number } = payload;
+        const { email } = payload;
 
-        setUsername(username);
-        setNumber(number);
+        setUsername(email);
+        setNumber(2);
         setAuthorized(true);
-      }      
+      }
     }
   }, []);
 
   const onSignInClick = async (email: string, password: string) => {
-    const response = await fetch('http://localhost:3000/login', {
+    const loginUrl = `http://localhost:3000/login?email=${email}&password=${password}`;
+    const response = await fetch(loginUrl, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ email, password })
+      headers: { 'Content-Type': 'application/json' },
     });
 
     const status = response.status;
     
     if(status === 200) {
       const data = await response.json();
-      const { accessToken, refreshToken } = data as SignInResponse;
+      const { access_token, refresh_token } = data as SignInResponse;
       
-      await saveTokensInStorage(accessToken, refreshToken);
+      await saveTokensInStorage(access_token, refresh_token);
       
-      const payload = jwt.decode(accessToken) as AccessTokenPayload;
-      const { username, number } = payload as AccessTokenPayload;
+      const payload = jwtDecode(access_token) as AccessTokenPayload;
+      const { email } = payload;
 
-      setStates(username, number, true);
+      setStates(email, 3, true);
+      navigate('/me');
+    } else {
+      signInFormRef.current?.showErrorMessage('Invalid email or password');
     }
   }
 
@@ -74,30 +77,34 @@ function App() {
 
   return (
     <div className="app">
-      <Router>
-        <Routes>
-          <Route
-            path="/me"
-            element={
-              <AccountPage
-                username={username}
-                number={number}
-              />
-            } />
-          <Route
-            path="/sign-in"
-            element={
-              <SignInRoute
-                onSubmitClick={onSignInClick} />
-            } />
-          <Route
-            path="/sign-up"
-            element={
-              <SignUpRoute
-                onSubmitClick={onSignUpClick} />
-            } />
-        </Routes>
-      </Router>
+      <Routes>
+        <Route
+          path="/me"
+          element={
+            <AccountPage
+              username={username}
+              number={number}
+            />
+          } />
+        <Route
+          path="/sign-in"
+          element={
+            <AuthForm
+              ref={signInFormRef}
+              type="signIn"
+              onSubmitClick={onSignInClick}
+              onLinkClick={() => navigate('/sign-up')} />
+          } />
+        <Route
+          path="/sign-up"
+          element={
+            <AuthForm
+              ref={signUpFormRef}
+              type="signUp"
+              onSubmitClick={onSignUpClick}
+              onLinkClick={() => navigate('/sign-in')} />
+          } />
+      </Routes>
     </div>
   );
 }
