@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
-import type { AccessTokenPayload, SignInResponse } from './types';
+import type {
+  AccessTokenPayload, SignInResponse, AuthFormRefBody
+} from './types';
 import AccountPage from './components/AccountPage/AccountPage';
 import AuthForm from './components/AuthForm/AuthForm';
 import saveTokensInStorage from './utils/saveTokensInStorage';
@@ -13,8 +15,8 @@ function App() {
   const [number, setNumber] = useState(0);
   const [authorized, setAuthorized] = useState(false);
 
-  const signUpFormRef = useRef<{ showErrorMessage: (msg: string) => void }>(null);
-  const signInFormRef = useRef<{ showErrorMessage: (msg: string) => void }>(null);
+  const signUpFormRef = useRef<AuthFormRefBody>(null);
+  const signInFormRef = useRef<AuthFormRefBody>(null);
 
   useEffect(() => {
     const accessJwt = localStorage.getItem('accessJwt');
@@ -29,6 +31,8 @@ function App() {
         setNumber(2);
         setAuthorized(true);
       }
+    } else {
+      navigate('/sign-in');
     }
   }, []);
 
@@ -56,8 +60,30 @@ function App() {
       signInFormRef.current?.showErrorMessage('Invalid email or password');
   }
 
-  const onSignUpClick = (email: string, password: string) => {
-    console.log(email, password);
+  const onSignUpClick = async (email: string, password: string) => {
+    const signUpUrl = `http://localhost:3000/sign_up`;
+    const requestBody = { email, password };
+    const response = await fetch(signUpUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(requestBody)
+    });
+    const status = response.status;
+
+    if(status === 200) {
+      const data = await response.json();
+      console.log(data);
+      const { access_token, refresh_token } = data as SignInResponse;
+
+      await saveTokensInStorage(access_token, refresh_token);
+
+      const payload = jwtDecode(access_token) as AccessTokenPayload;
+      const { email } = payload;
+
+      setStates(email, 1, true);
+      navigate('/me');
+    } else
+      signUpFormRef.current?.showErrorMessage('User with this email already exists');
   }
 
   const setStates = (username: string, number: number, authorized: boolean) => {
