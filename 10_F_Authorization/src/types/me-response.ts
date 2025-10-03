@@ -1,3 +1,6 @@
 export type MeResponse = {
-    username: string
+    request_num: number,
+    data: {
+        username: string
+    }
 }

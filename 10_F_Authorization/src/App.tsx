@@ -32,7 +32,8 @@ function App() {
     const meResponseStatus = meResponse.status;
 
     if(meResponseStatus === 200) {
-      const { username } = await meResponse.json() as MeResponse;
+      const body = await meResponse.json() as MeResponse;
+      const { username } = body.data;
 
       setUsername(username);
       
@@ -59,7 +60,8 @@ function App() {
       const meResponseStatus = meResponse.status;
 
       if(meResponseStatus === 200) {
-        const { username } = await meResponse.json() as MeResponse;
+        const body = await meResponse.json() as MeResponse;
+        const { username } = body.data;
 
         setUsername(username);
       } else navigate('/sign-in');
@@ -97,7 +99,8 @@ function App() {
     await saveTokensInStorage(access_token, refresh_token);
 
     const meResponse = await Fetcher.makeMeRequest(access_token);
-    const { username } = await meResponse.json() as MeResponse;
+    const body = await meResponse.json() as MeResponse;
+    const { username } = body.data;
 
     setStates(username, 1);
     navigate('/me');

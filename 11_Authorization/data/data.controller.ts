@@ -28,8 +28,9 @@ class DataController {
             const { email } = await this
                 .jwtService
                 .getAccessTokenPayload(validatedToken);
+            const request_num = num ? num : null;
             const responseBody = {
-                request_num: num,
+                request_num,
                 data: {
                     username: email
                 }

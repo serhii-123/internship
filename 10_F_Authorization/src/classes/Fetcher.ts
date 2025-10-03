@@ -27,6 +27,7 @@ class Fetcher {
         const refreshUrl = 'http://localhost:3000/refresh';
         const headers = { 'Authorization': `Bearer ${refreshToken}` };
         const response = await fetch(refreshUrl, {
+            method: 'POST',
             headers
         });
         
@@ -34,7 +35,7 @@ class Fetcher {
     }
 
     static async makeMeRequest(accessToken: string) {
-        const meUrl = 'https://localhost:3000/me';
+        const meUrl = 'http://localhost:3000/me';
         const headers = { 'Authorization': `Bearer ${accessToken}` };
         const response = await fetch(meUrl, {
             headers
