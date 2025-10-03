@@ -1,9 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import { jwtDecode } from 'jwt-decode';
 import type {
-  AccessTokenPayload, SignInResponse, AuthFormRefBody,
-  MeResponse
+  SignInResponse, AuthFormRefBody, MeResponse
 } from './types';
 import AccountPage from './components/AccountPage/AccountPage';
 import AuthForm from './components/AuthForm/AuthForm';
