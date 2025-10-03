@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import type {
-  AccessTokenPayload, SignInResponse, AuthFormRefBody
+  AccessTokenPayload, SignInResponse, AuthFormRefBody,
+  MeResponse
 } from './types';
 import AccountPage from './components/AccountPage/AccountPage';
 import AuthForm from './components/AuthForm/AuthForm';
@@ -14,28 +15,62 @@ function App() {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [number, setNumber] = useState(0);
-  const [authorized, setAuthorized] = useState(false);
 
   const signUpFormRef = useRef<AuthFormRefBody>(null);
   const signInFormRef = useRef<AuthFormRefBody>(null);
 
-  useEffect(() => {
+  useEffect(() => { init() }, []);
+
+  const init = async () => {
     const accessJwt = localStorage.getItem('accessJwt');
-    
-    if(accessJwt) {
-      const payload = jwtDecode(accessJwt) as AccessTokenPayload;
 
-      if(payload) {
-        const { email } = payload;
-
-        setUsername(email);
-        setNumber(2);
-        setAuthorized(true);
-      }
-    } else {
+    if(!accessJwt) {
       navigate('/sign-in');
+      
+      return;
     }
-  }, []);
+
+    const meResponse = await Fetcher.makeMeRequest(accessJwt);
+    const meResponseStatus = meResponse.status;
+
+    if(meResponseStatus === 200) {
+      const { username } = await meResponse.json() as MeResponse;
+
+      setUsername(username);
+      
+      return;
+    }
+
+    const refreshJwt = localStorage.getItem('refreshJwt');
+
+    if(!refreshJwt) {
+      navigate('/sign-in');
+
+      return;
+    }
+
+    const refreshResponse = await Fetcher.makeRefreshRequest(refreshJwt);
+    const refreshResponseStatus = refreshResponse.status;
+
+    if(refreshResponseStatus === 200) {
+      const { access_token } = await refreshResponse.json();
+      
+      localStorage.setItem('access_token', access_token);
+      
+      const meResponse = await Fetcher.makeMeRequest(access_token);
+      const meResponseStatus = meResponse.status;
+
+      if(meResponseStatus === 200) {
+        const { username } = await meResponse.json() as MeResponse;
+
+        setUsername(username);
+      } else navigate('/sign-in');
+
+      return;
+    }
+
+    navigate('/sign-in');
+  }
 
   const onSignInClick = async (email: string, password: string) => {
     const response = await Fetcher.makeSignInRequest(email, password);
@@ -59,21 +94,20 @@ function App() {
 
   const processSuccessfulAuthRequest = async (response: Response) => {
     const data = await response.json();
-      const { access_token, refresh_token } = data as SignInResponse;
+    const { access_token, refresh_token } = data as SignInResponse;
 
-      await saveTokensInStorage(access_token, refresh_token);
+    await saveTokensInStorage(access_token, refresh_token);
 
-      const payload = jwtDecode(access_token) as AccessTokenPayload;
-      const { email } = payload;
+    const meResponse = await Fetcher.makeMeRequest(access_token);
+    const { username } = await meResponse.json() as MeResponse;
 
-      setStates(email, 1, true);
-      navigate('/me');
+    setStates(username, 1);
+    navigate('/me');
   }
 
-  const setStates = (username: string, number: number, authorized: boolean) => {
+  const setStates = (username: string, number: number) => {
     setUsername(username);
     setNumber(number);
-    setAuthorized(authorized);
   }
 
   return (
