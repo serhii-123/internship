@@ -1,18 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import type {
   SignInResponse, AuthFormRefBody, MeResponse
 } from './types';
 import AccountPage from './components/AccountPage/AccountPage';
 import AuthForm from './components/AuthForm/AuthForm';
+import Fetcher from './classes/Fetcher';
 import saveTokensInStorage from './utils/saveTokensInStorage';
 import './App.css';
-import Fetcher from './classes/Fetcher';
 
 function App() {
   const navigate = useNavigate();
-  const [username, setUsername] = useState('');
-  const [number, setNumber] = useState(0);
 
   const signUpFormRef = useRef<AuthFormRefBody>(null);
   const signInFormRef = useRef<AuthFormRefBody>(null);
@@ -31,22 +29,12 @@ function App() {
     const meResponse = await Fetcher.makeMeRequest(accessJwt);
     const meResponseStatus = meResponse.status;
 
-    if(meResponseStatus === 200) {
-      const body = await meResponse.json() as MeResponse;
-      const { username } = body.data;
-
-      setUsername(username);
-      
-      return;
-    }
+    if(meResponseStatus === 200) return;
 
     const refreshJwt = localStorage.getItem('refreshJwt');
 
-    if(!refreshJwt) {
-      navigate('/sign-in');
-
-      return;
-    }
+    if(!refreshJwt)
+      return navigate('/sign-in');
 
     const refreshResponse = await Fetcher.makeRefreshRequest(refreshJwt);
     const refreshResponseStatus = refreshResponse.status;
@@ -54,17 +42,13 @@ function App() {
     if(refreshResponseStatus === 200) {
       const { access_token } = await refreshResponse.json();
       
-      localStorage.setItem('access_token', access_token);
+      localStorage.setItem('accessJwt', access_token);
       
       const meResponse = await Fetcher.makeMeRequest(access_token);
       const meResponseStatus = meResponse.status;
 
-      if(meResponseStatus === 200) {
-        const body = await meResponse.json() as MeResponse;
-        const { username } = body.data;
-
-        setUsername(username);
-      } else navigate('/sign-in');
+      if(meResponseStatus !== 200) 
+        navigate('/sign-in');
 
       return;
     }
@@ -97,18 +81,7 @@ function App() {
     const { access_token, refresh_token } = data as SignInResponse;
 
     await saveTokensInStorage(access_token, refresh_token);
-
-    const meResponse = await Fetcher.makeMeRequest(access_token);
-    const body = await meResponse.json() as MeResponse;
-    const { username } = body.data;
-
-    setStates(username, 1);
     navigate('/me');
-  }
-
-  const setStates = (username: string, number: number) => {
-    setUsername(username);
-    setNumber(number);
   }
 
   return (
@@ -118,14 +91,21 @@ function App() {
           path="/me"
           element={
             <AccountPage
-              username={username}
-              number={number}
-            />
+              key="numberlessPage"
+              numberless={true} />
+          } />
+        <Route
+          path="/me/*"
+          element={
+            <AccountPage
+              key="defaulPage"
+              numberless={false} />
           } />
         <Route
           path="/sign-in"
           element={
             <AuthForm
+              key="signInForm"
               ref={signInFormRef}
               type="signIn"
               onSubmitClick={onSignInClick}
@@ -135,6 +115,7 @@ function App() {
           path="/sign-up"
           element={
             <AuthForm
+              key="signUpForm"
               ref={signUpFormRef}
               type="signUp"
               onSubmitClick={onSignUpClick}

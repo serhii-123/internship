@@ -34,8 +34,8 @@ class Fetcher {
         return response;
     }
 
-    static async makeMeRequest(accessToken: string) {
-        const meUrl = 'http://localhost:3000/me';
+    static async makeMeRequest(accessToken: string, requestNum?: number) {
+        let meUrl = `http://localhost:3000/me${requestNum ? requestNum : ''}`;
         const headers = { 'Authorization': `Bearer ${accessToken}` };
         const response = await fetch(meUrl, {
             headers

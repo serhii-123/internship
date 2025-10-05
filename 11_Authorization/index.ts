@@ -1,6 +1,6 @@
-import { Hono } from 'hono'
-import { cors } from 'hono/cors'
-import { serve } from '@hono/node-server'
+import { Hono } from 'hono';
+import { cors } from 'hono/cors';
+import { serve } from '@hono/node-server';
 import * as env from './config/env';
 import UserModel from './user/user.model';
 import { connectDB } from './db';
