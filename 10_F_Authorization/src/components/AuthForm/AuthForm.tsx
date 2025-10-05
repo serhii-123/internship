@@ -1,4 +1,7 @@
-import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
+import {
+    forwardRef, useEffect, useImperativeHandle, useRef, useState,
+    type FocusEvent, type RefObject
+} from "react";
 import './auth-form.css';
 
 type FormType = 'signIn' | 'signUp';
@@ -20,6 +23,37 @@ function AuthForm(props: AuthFormProps, ref: any) {
     const [label, setLabel] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
+    const emailInputRef = useRef<HTMLInputElement>(null);
+    const passwordInputRef = useRef<HTMLInputElement>(null);
+
+    const onEmailBlur = async(e: FocusEvent<HTMLInputElement>) => {
+        const validationExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const { value } = e.target;
+        const isValid = validationExp.test(value);
+
+        await changeBorderColorByValidationResult(passwordInputRef, isValid);
+    }
+
+    const onPasswordBlur = async(e: FocusEvent<HTMLInputElement>) => {
+        const minLength = 8;
+        const { value } = e.target;
+        const isValid = value.length < minLength;
+
+        await changeBorderColorByValidationResult(passwordInputRef, isValid);
+    }
+
+    const changeBorderColorByValidationResult = async(
+        ref: RefObject<HTMLInputElement | null>,
+        isValid: boolean
+    ) => {
+        const style = (ref.current as HTMLInputElement).style;
+
+        if(isValid)
+            style.borderColor = 'rgb(255, 255, 255)';
+        else
+            style.borderColor = 'rgb(255, 100, 100)';
+    }
+
     useImperativeHandle(ref, () => ({
         showErrorMessage: (msg: string) => {
             setErrorMessage(msg);
@@ -27,7 +61,7 @@ function AuthForm(props: AuthFormProps, ref: any) {
     }));
 
     useEffect(() => {
-        setLabel(props.type === 'signIn' ? 'Sign In' : 'Sign Up'    )
+        setLabel(props.type === 'signIn' ? 'Sign In' : 'Sign Up');
     }, [props.type]);
     
     const onLinkClick = (type: LinkType) => {
@@ -43,11 +77,14 @@ function AuthForm(props: AuthFormProps, ref: any) {
     return <form className="auth-form">
         <h1 className="auth-form__heading">{label}</h1>
         <input
+            ref={emailInputRef}
             className="auth-form__input"
             type="text"
             placeholder="Email"
-            onChange={(e) => setEmail(e.target.value)} />
+            onChange={(e) => setEmail(e.target.value)}
+            onBlur={onEmailBlur} />
         <input
+            ref={passwordInputRef}
             className="auth-form__input"
             type="password"
             placeholder="Password"
@@ -66,7 +103,7 @@ function AuthForm(props: AuthFormProps, ref: any) {
                     <button
                         className="auth-form__link"
                         type="button"
-                        onClick={() => onLinkClick('signUp')}>Sign Up</button>
+                        onClick={() => onLinkClick('signUp')} >Sign Up</button>
                 </p>
             ): (
                 <p className="auth-form__text">
@@ -74,7 +111,7 @@ function AuthForm(props: AuthFormProps, ref: any) {
                     <button
                         className="auth-form__link"
                         type="button"
-                        onClick={() => onLinkClick('signIn')}>Sign in</button>
+                        onClick={() => onLinkClick('signIn')} >Sign in</button>
                 </p>
             ) }
         
