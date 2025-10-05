@@ -3,6 +3,8 @@ import {
     type FocusEvent, type RefObject
 } from "react";
 import './auth-form.css';
+import Validator from "./utils/Validator";
+import InputEventHandler from "./utils/InputEventHandler";
 
 type FormType = 'signIn' | 'signUp';
 type LinkType = FormType;
@@ -26,34 +28,6 @@ function AuthForm(props: AuthFormProps, ref: any) {
     const emailInputRef = useRef<HTMLInputElement>(null);
     const passwordInputRef = useRef<HTMLInputElement>(null);
 
-    const onEmailBlur = async(e: FocusEvent<HTMLInputElement>) => {
-        const validationExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        const { value } = e.target;
-        const isValid = validationExp.test(value);
-
-        await changeBorderColorByValidationResult(passwordInputRef, isValid);
-    }
-
-    const onPasswordBlur = async(e: FocusEvent<HTMLInputElement>) => {
-        const minLength = 8;
-        const { value } = e.target;
-        const isValid = value.length < minLength;
-
-        await changeBorderColorByValidationResult(passwordInputRef, isValid);
-    }
-
-    const changeBorderColorByValidationResult = async(
-        ref: RefObject<HTMLInputElement | null>,
-        isValid: boolean
-    ) => {
-        const style = (ref.current as HTMLInputElement).style;
-
-        if(isValid)
-            style.borderColor = 'rgb(255, 255, 255)';
-        else
-            style.borderColor = 'rgb(255, 100, 100)';
-    }
-
     useImperativeHandle(ref, () => ({
         showErrorMessage: (msg: string) => {
             setErrorMessage(msg);
@@ -65,34 +39,45 @@ function AuthForm(props: AuthFormProps, ref: any) {
     }, [props.type]);
     
     const onLinkClick = (type: LinkType) => {
-        if (props.onLinkClick)
+        if(props.onLinkClick)
             props.onLinkClick(type);
     }
 
-    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        props.onSubmitClick(email, password);
+
+        const emailIsValid = await Validator.validateEmail(email);
+        const passwordIsValid = await Validator.validatePassword(password);
+
+        if(emailIsValid && passwordIsValid)
+            props.onSubmitClick(email, password);
     }
 
     return <form className="auth-form">
         <h1 className="auth-form__heading">{label}</h1>
         <input
+            key="emailInput"
             ref={emailInputRef}
             className="auth-form__input"
             type="text"
             placeholder="Email"
-            onChange={(e) => setEmail(e.target.value)}
-            onBlur={onEmailBlur} />
+            onChange={e => setEmail(e.target.value)}
+            onBlur={e => InputEventHandler.onEmailBlur(emailInputRef, e)}
+            onSubmit={e => e.preventDefault()} />
         <input
+            key="passwordInput"
             ref={passwordInputRef}
             className="auth-form__input"
             type="password"
             placeholder="Password"
-            onChange={(e) => setPassword(e.target.value)} />
+            onChange={e => setPassword(e.target.value)}
+            onBlur={e => InputEventHandler.onPasswordBlur(passwordInputRef, e)}
+            onSubmit={e => e.preventDefault()} />
         <button
             className="auth-form__btn"
             type="submit"
-            onClick={handleClick} >
+            onClick={handleClick}
+            onSubmit={handleClick} >
             {label}
         </button>
 
