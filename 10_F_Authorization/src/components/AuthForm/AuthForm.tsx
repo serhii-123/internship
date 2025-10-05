@@ -1,6 +1,5 @@
 import {
     forwardRef, useEffect, useImperativeHandle, useRef, useState,
-    type FocusEvent, type RefObject
 } from "react";
 import './auth-form.css';
 import Validator from "./utils/Validator";
