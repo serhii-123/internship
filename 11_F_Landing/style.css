@@ -101,4 +101,47 @@
         font-size: 16px;
         color: #FFFFFF;
     }
+
+    .get-started__btn-description {
+        display: flex;
+        justify-content: space-between;
+        width: 111px;
+        margin-bottom: 36px;
+    }
+
+    .get-started__btn-description-text {
+        font-family: 'Gilroy', sans-serif;
+        font-size: 14px;
+        text-align: center;
+        color: #5C5C5C;
+    }
+
+    .get-started__btn-description-img {
+        width: 16px;
+        height: 16px;
+    }
+
+    .get-started__interface-img-block {
+        width: 613.16px;
+        height: 417px;
+        position: relative;
+        left: 0px;
+    }
+    
+    .get-started__mobile-interface-img {
+        width: 125.83px;
+        height: 245.99px;
+        position: absolute;
+        bottom: 0px;
+        left: 10px;
+        transform: rotate(-8deg);
+    }
+    .get-started__pc-interface-img {
+        width: 465.28px;
+        height: 311.93px;
+        position: absolute;
+        bottom: 60px;
+        left: 102px;
+        transform: rotate(-8deg);
+    }
 }
