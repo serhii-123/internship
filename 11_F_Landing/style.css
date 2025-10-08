@@ -46,4 +46,59 @@
         width: 24px;
         height: 18px;
     }
+
+    .get-started {
+        padding: 0 21px;
+    }
+
+    .get-started__heading-container {
+        margin-bottom: 16px;
+        position: relative;
+    }
+
+    .get-started__stars-img {
+        width: 58.16px;
+        height: 41.01px;
+        position: absolute;
+        left: 0px;
+        top: -34.56px;
+    }
+
+    .get-started__heading {
+        font-family: 'Gilroy', sans-serif;
+        font-size: 28px;    
+        text-align: center;
+        color: #212121;
+    }
+
+    .get-started__heading-part-selection {
+        color: #FF474D;
+    }
+
+    .get-started__description {
+        margin-bottom: 32px;
+        font-family: 'Inter', sans-serif;
+        font-size: 14px;
+        text-align: center;
+        color: #5C5C5C;
+    }
+
+    .get-started__btn-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+    }
+
+    .get-started__btn {
+        margin: 0 auto;
+        width: 188px;
+        height: 48px;
+        border: 0;
+        border-radius: 16px;
+        background-color: #FF474D;
+        font-family: 'Gilroy';
+        font-size: 16px;
+        color: #FFFFFF;
+    }
 }
