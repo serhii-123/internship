@@ -144,9 +144,25 @@
         width: 615.02px;
         height: 615.02px;
         position: absolute;
-        left: -330px;
+        left: -325px;
         bottom: -260px;
         transform: rotate(45deg);
+    }
+
+    .interface-img-container__little-rectangles-small-img {
+        width: 162.87px;
+        height: 123.25px;
+        position: absolute;
+        top: -31.15px;
+        left: -10px;
+    }
+
+    .interface-img-container__little-rectangles-big-img {
+        width: 277.53px;
+        height: 210.02px;
+        position: absolute;
+        bottom: 0px;
+        left: 95px;
     }
     
     .interface-img-container__mobile-interface-img {
@@ -154,7 +170,7 @@
         height: 245.99px;
         position: absolute;
         bottom: 0px;
-        left: 10px;
+        left: 17px;
         transform: rotate(-8deg);
     }
 
