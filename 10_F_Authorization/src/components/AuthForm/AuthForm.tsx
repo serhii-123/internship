@@ -2,7 +2,7 @@ import {
     forwardRef, useEffect, useImperativeHandle, useRef, useState,
 } from "react";
 import './auth-form.css';
-import Validator from "./utils/Validator";
+import Validator from "./utils/validator";
 import InputEventHandler from "./utils/InputEventHandler";
 
 type FormType = 'signIn' | 'signUp';

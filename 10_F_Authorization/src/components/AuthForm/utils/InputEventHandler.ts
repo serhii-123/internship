@@ -1,5 +1,5 @@
 import type { FocusEvent, RefObject } from "react";
-import Validator from "./Validator";
+import Validator from "./validator";
 
 class InputEventHandler {
     static async onEmailBlur(inputRef: RefObject<HTMLInputElement | null>, e: FocusEvent<HTMLInputElement>) {
