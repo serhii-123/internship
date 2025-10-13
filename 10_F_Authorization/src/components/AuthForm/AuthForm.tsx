@@ -1,10 +1,9 @@
 import {
     forwardRef, useEffect, useImperativeHandle, useRef, useState,
-    type RefObject,
 } from "react";
 import './auth-form.css';
 import Validator from "./utils/validator";
-import InputEventHandler from "./utils/InputEventHandler";
+import InputBlock from "../InputBlock/InputBlock";
 
 type FormType = 'signIn' | 'signUp';
 type LinkType = FormType;
@@ -25,8 +24,8 @@ function AuthForm(props: AuthFormProps, ref: any) {
     const [label, setLabel] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
-    const emailInputRef = useRef<HTMLInputElement>(null);
-    const passwordInputRef = useRef<HTMLInputElement>(null);
+    const emailInputRef = useRef<any>(null);
+    const passwordInputRef = useRef<any>(null);
 
     useImperativeHandle(ref, () => ({
         showErrorMessage: (msg: string) => {
@@ -48,18 +47,12 @@ function AuthForm(props: AuthFormProps, ref: any) {
 
         const emailIsValid = await Validator.validateEmail(email);
         const passwordIsValid = await Validator.validatePassword(password);
-        const emailStyle = (emailInputRef as RefObject<HTMLInputElement>)
-            .current
-            .style;
-        const passwordStyle = (passwordInputRef as RefObject<HTMLInputElement>)
-            .current
-            .style;
 
         if(!emailIsValid)
-            emailStyle.borderColor = 'rgb(255, 100, 100)';
+            emailInputRef.current.makeInvalid();
 
         if(!passwordIsValid)
-            passwordStyle.borderColor = 'rgb(255, 100, 100)';
+            passwordInputRef.current.makeInvalid();
 
         if(emailIsValid && passwordIsValid)
             props.onSubmitClick(email, password);
@@ -67,24 +60,24 @@ function AuthForm(props: AuthFormProps, ref: any) {
 
     return <form className="auth-form">
         <h1 className="auth-form__heading">{label}</h1>
-        <input
-            key="emailInput"
+        <InputBlock
             ref={emailInputRef}
-            className="auth-form__input"
+            key="emailInput"
+            className="auth-form__input-block"
             type="text"
             placeholder="Email"
-            onChange={e => setEmail(e.target.value)}
-            onBlur={e => InputEventHandler.onEmailBlur(emailInputRef, e)}
-            onSubmit={e => e.preventDefault()} />
-        <input
-            key="passwordInput"
+            invalidInputMessage="Invalid email vro🥀"
+            validation={Validator.validateEmail}
+            onChange={e => setEmail(e.target.value)} />
+        <InputBlock
             ref={passwordInputRef}
-            className="auth-form__input"
+            key="passwordInput"
+            className="auth-form__input-block"
             type="password"
             placeholder="Password"
-            onChange={e => setPassword(e.target.value)}
-            onBlur={e => InputEventHandler.onPasswordBlur(passwordInputRef, e)}
-            onSubmit={e => e.preventDefault()} />
+            invalidInputMessage="So short password vro🥀"
+            validation={Validator.validatePassword}
+            onChange={e => setPassword(e.target.value)} />
         <button
             className="auth-form__btn"
             type="submit"
