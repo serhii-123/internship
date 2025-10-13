@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import type {
     SignInResponse, AuthFormRefBody
 } from './types';
@@ -11,6 +11,7 @@ import './App.css';
 
 function App() {
     const navigate = useNavigate();
+    const location = useLocation();
 
     const signUpFormRef = useRef<AuthFormRefBody>(null);
     const signInFormRef = useRef<AuthFormRefBody>(null);
@@ -18,12 +19,12 @@ function App() {
     useEffect(() => { init() }, []);
 
     const init = async () => {
+        const currentLoc = location.pathname;
         const accessJwt = localStorage.getItem('accessJwt');
 
         if(!accessJwt) {
-            navigate('/sign-in');
-        
-            return;
+            if(currentLoc === '/sign-up') return;
+            else return navigate('/sign-in');
         }
 
         const meResponse = await Fetcher.makeMeRequest(accessJwt);
