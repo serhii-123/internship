@@ -66,7 +66,7 @@ function AuthForm(props: AuthFormProps, ref: any) {
             className="auth-form__input-block"
             type="text"
             placeholder="Email"
-            invalidInputMessage="Invalid email vro🥀"
+            invalidInputMessage="Invalid email"
             validation={Validator.validateEmail}
             onChange={e => setEmail(e.target.value)} />
         <InputBlock
@@ -75,7 +75,7 @@ function AuthForm(props: AuthFormProps, ref: any) {
             className="auth-form__input-block"
             type="password"
             placeholder="Password"
-            invalidInputMessage="So short password vro🥀"
+            invalidInputMessage="So short password"
             validation={Validator.validatePassword}
             onChange={e => setPassword(e.target.value)} />
         <button
