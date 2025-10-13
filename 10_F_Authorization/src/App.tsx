@@ -29,12 +29,11 @@ function App() {
         const meResponse = await Fetcher.makeMeRequest(accessJwt);
         const meResponseStatus = meResponse.status;
 
-        if(meResponseStatus === 200) return;
+        if(meResponseStatus === 200) return navigate('/me');
 
         const refreshJwt = localStorage.getItem('refreshJwt');
 
-        if(!refreshJwt)
-            return navigate('/sign-in');
+        if(!refreshJwt) return navigate('/sign-in');
 
         const refreshResponse = await Fetcher.makeRefreshRequest(refreshJwt);
         const refreshResponseStatus = refreshResponse.status;
@@ -47,8 +46,9 @@ function App() {
             const meResponse = await Fetcher.makeMeRequest(access_token);
             const meResponseStatus = meResponse.status;
 
-            if(meResponseStatus !== 200) 
-                navigate('/sign-in');
+            if(meResponseStatus === 200) 
+                navigate('/me');
+            else navigate('/sign-in');
 
             return;
         }
@@ -67,13 +67,13 @@ function App() {
     }
 
     const onSignUpClick = async (email: string, password: string) => {
-    const response = await Fetcher.makeSignUpRequest(email, password);
-    const status = response.status;
+        const response = await Fetcher.makeSignUpRequest(email, password);
+        const status = response.status;
 
-    if(status === 200) 
-        processSuccessfulAuthRequest(response)
-    else
-        signUpFormRef.current?.showErrorMessage('User with this email already exists');
+        if(status === 200) 
+            processSuccessfulAuthRequest(response);
+        else
+            signUpFormRef.current?.showErrorMessage('User with this email already exists');
     }
 
     const processSuccessfulAuthRequest = async (response: Response) => {
