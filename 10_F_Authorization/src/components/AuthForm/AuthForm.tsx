@@ -1,5 +1,6 @@
 import {
     forwardRef, useEffect, useImperativeHandle, useRef, useState,
+    type RefObject,
 } from "react";
 import './auth-form.css';
 import Validator from "./utils/validator";
@@ -47,6 +48,18 @@ function AuthForm(props: AuthFormProps, ref: any) {
 
         const emailIsValid = await Validator.validateEmail(email);
         const passwordIsValid = await Validator.validatePassword(password);
+        const emailStyle = (emailInputRef as RefObject<HTMLInputElement>)
+            .current
+            .style;
+        const passwordStyle = (passwordInputRef as RefObject<HTMLInputElement>)
+            .current
+            .style;
+
+        if(!emailIsValid)
+            emailStyle.borderColor = 'rgb(255, 100, 100)';
+
+        if(!passwordIsValid)
+            passwordStyle.borderColor = 'rgb(255, 100, 100)';
 
         if(emailIsValid && passwordIsValid)
             props.onSubmitClick(email, password);
