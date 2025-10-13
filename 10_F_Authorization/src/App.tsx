@@ -21,8 +21,9 @@ function App() {
     const init = async () => {
         const currentLoc = location.pathname;
         const accessJwt = localStorage.getItem('accessJwt');
+        const refreshJwt = localStorage.getItem('refreshJwt');
 
-        if(!accessJwt) {
+        if(!accessJwt || !refreshJwt) {
             if(currentLoc === '/sign-up') return;
             else return navigate('/sign-in');
         }
@@ -32,11 +33,6 @@ function App() {
 
         if(meResponseStatus === 200) return;
 
-        const refreshJwt = localStorage.getItem('refreshJwt');
-
-        if(!refreshJwt)
-            return navigate('/sign-in');
-
         const refreshResponse = await Fetcher.makeRefreshRequest(refreshJwt);
         const refreshResponseStatus = refreshResponse.status;
 
@@ -44,12 +40,6 @@ function App() {
             const { access_token } = await refreshResponse.json();
         
             localStorage.setItem('accessJwt', access_token);
-        
-            const meResponse = await Fetcher.makeMeRequest(access_token);
-            const meResponseStatus = meResponse.status;
-
-            if(meResponseStatus !== 200) 
-                navigate('/sign-in');
 
             return;
         }
