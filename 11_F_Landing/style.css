@@ -184,7 +184,7 @@
     }
 
     .check-out {
-        padding-top: 98.5px;
+        padding: 98.5px 8.25px 0;
         position: relative;
         z-index: 0;
     }
@@ -199,13 +199,56 @@
     }
 
     .check-out__main {
+        margin-bottom: 48.18px;
         position: relative;
         z-index: 1;
     }
 
     .check-out__heading {
+        margin-bottom: 16px;
         font-family: 'Gilroy', sans-serif;
         font-size: 28px;
         text-align: center;
+        color: rgb(33, 33, 33);
+    }
+
+    .check-out__description {
+        margin-bottom: 32px;
+        font-family: 'Inter', sans-serif;
+        font-size: 14px;
+        text-align: center;
+        color: rgb(92, 92, 92);
+    }
+
+    .check-out__play-video-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        column-gap: 8px;
+        width: 188px;
+        height: 48px;
+        margin: 0 auto;
+        border: none;
+        border-radius: 16px;
+        background-color: rgb(255, 255, 255);
+    }
+
+    .check-out__play-img {
+        display: block;
+        width: 10px;
+        height: 12px;
+    }
+
+    .check-out__play-text {
+        font-family: 'Gilroy', sans-serif;
+        font-size: 14px;
+    }
+
+    .check-out__chats-orders-payments-img {
+        display: block;
+        width: 343px;
+        height: 302.65px;
+        position: relative;
+        z-index: 1;
     }
 }
