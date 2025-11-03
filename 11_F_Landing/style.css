@@ -244,11 +244,23 @@
         font-size: 14px;
     }
 
+    .check-out__img-container {
+        position: relative;
+        z-index: 1;
+    }
+
     .check-out__chats-orders-payments-img {
         display: block;
         width: 343px;
         height: 302.65px;
-        position: relative;
-        z-index: 1;
+    }
+
+    .check-out-block__small-rectangles-img {
+        display: block;
+        width: 199.21px;
+        height: 150.75px;
+        position: absolute;
+        top: 27.32px;
+        left: -100.25px;
     }
 }
