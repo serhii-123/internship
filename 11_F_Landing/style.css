@@ -182,4 +182,30 @@
         left: 102px;
         transform: rotate(-8deg);
     }
+
+    .check-out {
+        padding-top: 98.5px;
+        position: relative;
+        z-index: 0;
+    }
+
+    .check-out__background-rectangle {
+        width: 2051.72px;
+        height: 766.96px;
+        transform: rotate(-8deg);
+        position: absolute;
+        top: -130px;
+        left: -60px;
+    }
+
+    .check-out__main {
+        position: relative;
+        z-index: 1;
+    }
+
+    .check-out__heading {
+        font-family: 'Gilroy', sans-serif;
+        font-size: 28px;
+        text-align: center;
+    }
 }
