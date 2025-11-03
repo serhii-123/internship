@@ -8,9 +8,10 @@ const LAMBDA_URL ="https://1na9d4z679.execute-api.eu-central-1.amazonaws.com/def
 
 export const options = {
   stages: [
-    { duration: '20s', target: 20 },
-    { duration: '40s', target: 50 },
-    { duration: '1m', target: 75 },
+    { duration: '20s', target: 30 },
+    { duration: '20s', target: 60 },
+    { duration: '10s', target: 75 },
+    { duration: '15m', target: 75 },
     { duration: '30s', target: 0 },
   ],
 };
