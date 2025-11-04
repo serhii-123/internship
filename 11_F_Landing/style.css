@@ -279,7 +279,7 @@
 
     .chain-transactions__main {
         width: 367px;
-        margin-left: 16px;
+        margin: 0 0 57px 16px;
     }
 
     .chain-transactions__heading {
@@ -342,5 +342,37 @@
         color: rgb(255, 255, 255);
         font-family: 'Gilroy';
         font-size: 16px;
+    }
+
+    .chain-transactions__img-block {
+        height: 637.99px;
+        position: relative;
+    }
+
+    .chain-transactions__particles-img {
+        width: 83.19px;
+        height: 130.22px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: rotate(147.97deg);
+    }
+
+    .chain-transactions__background-rectangle {
+        width: 451.13px;
+        height: 451.13px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    .chain-transactions__background-inserted-rectangle {
+        width: 395.02px;
+        height: 395.02px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(45deg);
     }
 }
