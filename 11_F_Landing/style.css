@@ -259,12 +259,21 @@
         height: 302.65px;
     }
 
-    .check-out-block__small-rectangles-img {
+    .check-out-block__left-small-rectangles-img {
         display: block;
         width: 199.21px;
         height: 150.75px;
         position: absolute;
         top: 27.32px;
         left: -100.25px;
+    }
+    
+    .check-out-block__right-small-rectangles-img {
+        display: block;
+        width: 298.65px;
+        height: 226px;
+        position: absolute;
+        top: 233.82px;
+        right: -160.9px;
     }
 }
