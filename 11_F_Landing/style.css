@@ -283,6 +283,7 @@
     }
 
     .chain-transactions__heading {
+        width: 335px;
         margin-bottom: 16px;
         font-family: 'Gilroy', sans-serif;
         font-size: 28px;
@@ -294,18 +295,20 @@
         display: flex;
         justify-content: center;
         column-gap: 8px;
-        margin-bottom: 24px;
+        width: 311px;
+        height: 40px;
+        margin: 0 0 24px 16px;
     }
 
     .chain-transactions__btn {
         display: block;
-        width: 94px;
         height: 40px;
         background-color: rgb(243, 244, 245);
         border: none;
         border-radius: 8px;
+        padding: 0 24px;
         font-family: 'Inter', sans-serif;
-        font-size: 16px;
+        font-size: 14px;
         color: rgb(33, 33, 33);
     }
 
@@ -316,6 +319,7 @@
 
     .chain-transactions__item {
         margin-bottom: 8px;
+        padding-left: 8px;
         font-family: 'Inter', sans-serif;
         font-size: 14px;
         color: rgb(33, 33, 33);   
