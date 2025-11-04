@@ -313,6 +313,7 @@
     }
 
     .chain-transactions__list {
+        margin-bottom: 32px;
         padding-left: 20px;
         list-style-image: url('./images/list-rectangle.svg');
     }
@@ -322,10 +323,24 @@
         padding-left: 8px;
         font-family: 'Inter', sans-serif;
         font-size: 14px;
-        color: rgb(33, 33, 33);   
+        line-height: 1.5;
+        color: rgb(33, 33, 33);
     }
 
     .chain-transaction__itme:last-child {
         margin: 0;
+    }
+
+    .chain-transactions__more-features-btn {
+        display: block;
+        width: 180px;
+        height: 48px;
+        margin: 0 auto;
+        border: none;
+        border-radius: 16px;
+        background-color: rgb(255, 71, 77);
+        color: rgb(255, 255, 255);
+        font-family: 'Gilroy';
+        font-size: 16px;
     }
 }
