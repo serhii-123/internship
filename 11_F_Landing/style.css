@@ -327,7 +327,7 @@
         color: rgb(33, 33, 33);
     }
 
-    .chain-transaction__itme:last-child {
+    .chain-transaction__item:last-child {
         margin: 0;
     }
 
@@ -353,8 +353,8 @@
         width: 83.19px;
         height: 130.22px;
         position: absolute;
-        top: 0;
-        left: 0;
+        top: 1.87px;
+        left: 12.39px;
         transform: rotate(147.97deg);
     }
 
@@ -374,5 +374,34 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    .chain-transactions__little-rectangles {
+        display: block;
+        width: 277.55px;
+        height: 210.04px;
+        position: absolute;
+        right: -37.89px;
+        top: 90.53px;
+    }
+
+    .chain-transactions__fruit-planet-img {
+        display: block;
+        width: 184px;
+        height: 364px;
+        position: absolute;
+        left: -6.57px;
+        top: 91.97px;
+        transform: rotate(-8deg);
+    }
+
+    .chain-transactions__chats-img {
+        display: block;
+        width: 184px;
+        height: 364px;
+        position: absolute;
+        right: -8.43px;
+        top: 181.03px;
+        transform: rotate(-8deg);
     }
 }
