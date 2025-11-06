@@ -489,4 +489,43 @@ html, body {
         width: 169px;
         height: 20px;
     }
+
+    .why-choose {
+        padding-top: 100px;
+        position: relative;
+    }
+
+    .why-choose__particles-img {
+        display: block;
+        width: 213.57px;
+        height: 353.29px;
+        position: absolute;
+        top: -121.73px;
+        right: 76.25px;
+        transform: rotate(90.55deg);
+        z-index: -1;
+    }
+
+    .why-choose__background {
+        position: absolute;
+        top: 47.42px;
+        left: -71.28px;
+        transform: rotate(-8deg);
+        overflow: hidden;
+    }
+
+    .why-choose__long-background-img {
+        display: block;
+        width: 1991.91px;
+        height: 904.53px;
+    }
+
+    .why-choose__left-background-rectangle-img {
+        width: 626.13px;
+        height: 626.13px;
+        position: absolute;
+        left: -300px;
+        top: -300px;
+    }
+
 }
