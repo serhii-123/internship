@@ -430,4 +430,63 @@ html, body {
         top: 181.03px;
         transform: rotate(-8deg);
     }
+
+    .featured-on {
+        padding: 49px 0 48px;
+        background-color: rgb(250, 250, 250);
+    }
+
+    .featured-on__wrapper {
+        width: 253px;
+        margin: 0 auto;
+    }
+
+    .featured-on__heading {
+        margin-bottom: 24px;
+        font-family: 'Gilroy', sans-serif;
+        font-size: 28px;    
+        text-align: center;
+        color: #212121;
+    }
+
+    .featured-on__horizontal-line {
+        width: 253px;
+        height: 1px;
+        margin: 0 auto 32px;
+        border: none;
+        background-color: rgb(210, 210, 210);
+    }
+
+    .featured-on__img-container {
+        width: 203px;
+        margin-left: 11px;
+    }
+
+    .featured-on__img {
+        display: block;
+        margin: 0 auto;
+    }
+
+    .featured-on__img_techcrunch {
+        width: 189px;
+        height: 28px;
+        margin-bottom: 48px;
+    }
+
+    .featured-on__img_techinasia {
+        width: 203px;
+        height: 40px;
+        margin-bottom: 48px;
+    }
+
+    .featured-on__img_pymnts {
+        width: 153px;
+        height: 22px;
+        margin-bottom: 58px;
+    }
+
+    .featured-on__img_venture-beat {
+        width: 169px;
+        height: 20px;
+    }
 }
