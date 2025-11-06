@@ -4,6 +4,10 @@
     padding: 0;
 }
 
+html, body {
+    overflow-x: hidden;
+}
+
 @media (max-width: 375px) {
     .wrapper__header {
         margin-bottom: 78px;
@@ -275,6 +279,10 @@
         position: absolute;
         top: 233.82px;
         right: -160.9px;
+    }
+
+    .main__chain-transactions {
+        margin-bottom: 70px;
     }
 
     .chain-transactions__main {
