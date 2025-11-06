@@ -524,8 +524,9 @@ html, body {
         width: 626.13px;
         height: 626.13px;
         position: absolute;
-        left: -300px;
-        top: -300px;
+        left: -358.24px;
+        top: -83.28px;
+        transform: rotate(53deg);
     }
 
 }
