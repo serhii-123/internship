@@ -491,7 +491,7 @@ html, body {
     }
 
     .why-choose {
-        padding-top: 200px;
+        padding-top: 220px;
         position: relative;
     }
 
@@ -526,8 +526,8 @@ html, body {
         width: 626.13px;
         height: 626.13px;
         position: absolute;
-        left: -265px;
-        top: -245px;
+        left: -245px;
+        top: -210px;
         transform: rotate(53deg);
     }
 
@@ -552,7 +552,9 @@ html, body {
     }
 
     .why-choose__wrapper {
-        
+        width: 375px;
+        margin: 0 auto;
+        padding-left: 32px;
     }
 
     .why-choose__heading {
