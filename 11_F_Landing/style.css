@@ -491,7 +491,7 @@ html, body {
     }
 
     .why-choose {
-        padding-top: 100px;
+        padding-top: 200px;
         position: relative;
     }
 
@@ -512,6 +512,7 @@ html, body {
         left: -71.28px;
         transform: rotate(-8deg);
         overflow: hidden;
+        z-index: -1;
     }
 
     .why-choose__long-background-img {
@@ -521,6 +522,7 @@ html, body {
     }
 
     .why-choose__left-background-rectangle-img {
+        display: block;
         width: 626.13px;
         height: 626.13px;
         position: absolute;
@@ -530,11 +532,33 @@ html, body {
     }
 
     .why-choose__right-background-rectangle-img {
+        display: block;
         width: 840.74px;
         height: 840.74px;
         transform: rotate(53deg);
         position: absolute;
         top: 160px;
         right: 730px;
+    }
+
+    .why-choose__little-rectangles {
+        display: block;
+        width: 411.26px;
+        height: 311.21px;
+        position: absolute;
+        top: 773px;
+        left: -90px;
+        transform: rotate(8deg);
+    }
+
+    .why-choose__wrapper {
+        
+    }
+
+    .why-choose__heading {
+        font-family: 'Gilroy', sans-serif;
+        font-size: 28px;
+        text-align: center;
+        color: rgb(255, 255, 255);
     }
 }
