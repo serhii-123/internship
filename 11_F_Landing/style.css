@@ -569,6 +569,24 @@ html, body {
         width: 343px;
         height: 550px;
         border-radius: 32px;
+        padding-top: 20px;
         background-color: rgb(255, 255, 255);
+    }
+
+    .why-choose__review-img-container {
+        height: 235px;
+        position: relative;
+    }
+    
+    .why-choose__item-shadow-img {
+        position: absolute;
+        top: 0;
+        left: 125.48px;
+    }
+
+    .why-choose__item-img {
+        position: absolute;
+        top: 0;
+        left: 92px;
     }
 }
