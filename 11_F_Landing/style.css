@@ -558,9 +558,17 @@ html, body {
     }
 
     .why-choose__heading {
+        margin: 0 0 32px 26px;
         font-family: 'Gilroy', sans-serif;
         font-size: 28px;
-        text-align: center;
+        text-align: left;
         color: rgb(255, 255, 255);
+    }
+
+    .why-choose__review-block {
+        width: 343px;
+        height: 550px;
+        border-radius: 32px;
+        background-color: rgb(255, 255, 255);
     }
 }
