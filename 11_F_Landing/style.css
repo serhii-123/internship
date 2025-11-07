@@ -603,6 +603,7 @@ html, body {
 
     .who-choose__review-text-container {
         width: 327px;
+        margin-bottom: 24px;
         border-radius: 0 16px 16px 0;
         padding: 20px 16px 20px 24px;
         background-color: rgb(241, 241, 241);
@@ -611,5 +612,33 @@ html, body {
     .why-choose__review-text {
         font-family: 'Inter', sans-serif;
         font-size: 16px;
+    }
+
+    .why-choose__client-block {
+        display: flex;
+        column-gap: 12px;
+        align-items: center;
+        padding-left: 24px;
+        position: relative;
+    }
+
+    .why-choose__client-name {
+        margin-bottom: 4px;
+        font-family: 'Gilroy', sans-serif;
+        font-size: 16px;
+    }
+
+    .why-choose__client-description {
+        font-family: 'Inter', sans-serif;
+        font-size: 10px;
+    }
+
+    .why-choose__quote-img {
+        display: block;
+        width: 24px;
+        height: 24px;
+        position: absolute;
+        top: 0;
+        right: 24px;
     }
 }
