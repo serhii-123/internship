@@ -579,6 +579,7 @@ html, body {
     }
     
     .why-choose__item-shadow-img {
+        height: 235px;
         position: absolute;
         top: 0;
         left: 125.48px;
@@ -588,5 +589,27 @@ html, body {
         position: absolute;
         top: 0;
         left: 92px;
+    }
+
+    .why-choose__item-particles-img {
+        display: block;
+        width: 51.08px;
+        height: 82.3px;
+        position: absolute;
+        top: 86.17px;
+        left: 201.6px;
+        transform: rotate(50.5deg);
+    }
+
+    .who-choose__review-text-container {
+        width: 327px;
+        border-radius: 0 16px 16px 0;
+        padding: 20px 16px 20px 24px;
+        background-color: rgb(241, 241, 241);
+    }
+
+    .why-choose__review-text {
+        font-family: 'Inter', sans-serif;
+        font-size: 16px;
     }
 }
