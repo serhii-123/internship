@@ -524,9 +524,17 @@ html, body {
         width: 626.13px;
         height: 626.13px;
         position: absolute;
-        left: -358.24px;
-        top: -83.28px;
+        left: -265px;
+        top: -245px;
         transform: rotate(53deg);
     }
 
+    .why-choose__right-background-rectangle-img {
+        width: 840.74px;
+        height: 840.74px;
+        transform: rotate(45deg);
+        position: absolute;
+        top: 500px;
+        right: -700px;
+    }
 }
