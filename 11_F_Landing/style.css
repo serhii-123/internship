@@ -532,9 +532,9 @@ html, body {
     .why-choose__right-background-rectangle-img {
         width: 840.74px;
         height: 840.74px;
-        transform: rotate(45deg);
+        transform: rotate(53deg);
         position: absolute;
-        top: 500px;
-        right: -700px;
+        top: 160px;
+        right: 730px;
     }
 }
