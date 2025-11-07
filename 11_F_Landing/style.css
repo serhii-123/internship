@@ -491,7 +491,7 @@ html, body {
     }
 
     .why-choose {
-        padding-top: 220px;
+        padding-top: 258px;
         position: relative;
     }
 
@@ -546,8 +546,8 @@ html, body {
         width: 411.26px;
         height: 311.21px;
         position: absolute;
-        top: 773px;
-        left: -90px;
+        bottom: -178px;
+        left: -142px;
         transform: rotate(8deg);
     }
 
@@ -568,6 +568,7 @@ html, body {
     .why-choose__review-block {
         width: 343px;
         height: 550px;
+        margin-bottom: 26.07px;
         border-radius: 32px;
         padding-top: 20px;
         background-color: rgb(255, 255, 255);
@@ -640,5 +641,30 @@ html, body {
         position: absolute;
         top: 0;
         right: 24px;
+    }
+
+    .why-choose__navigation {
+        display: flex;
+        justify-content: center;
+        margin: 0 auto;
+        padding-right: 32px;
+    }
+    
+    .why-choose__navigation-list {
+        display: flex;
+        column-gap: 20.14px;
+        list-style-type: none;
+    }
+
+    .why-choose__navigation-item {
+        width: 10px;
+        height: 10px;
+        border-radius: 2px;
+        background-color: rgba(255, 255, 255, 0.2);
+        transform: rotate(45deg);
+    }
+
+    .why-choose__navigation-item_selected {
+        background-color: rgb(255, 255, 255);
     }
 }
