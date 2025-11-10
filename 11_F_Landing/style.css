@@ -672,10 +672,6 @@ html, body {
         background-color: rgb(255, 255, 255);
     }
 
-    .put-a-smile {
-
-    }
-
     .put-a-smile__heading {
         margin-bottom: 56.84px;
         font-family: 'Gilroy', sans-serif;
@@ -707,6 +703,11 @@ html, body {
         transform: translateY(calc(100% * 2 + 4.26px * 2)) rotate(45deg);
     }
 
+    .put-a-smile__company-img-container_pet-shop-gembul,
+    .put-a-smile__company-img-container_kho-pa-ka {
+        transform: rotate(45deg);
+    }
+
     .put-a-smile__company-img-container_hex-healthcare,
     .put-a-smile__company-img-container_binondo-beauty-supply,
     .put-a-smile__company-img-container_es-teh-indonesia,
@@ -722,5 +723,50 @@ html, body {
     .put-a-smile__company-img_nayla {
         width: 30.45px;
         height: 37.21px;
+    }
+
+    .put-a-smile__company-img_hex-healthcare {
+        width: 40.6px;
+        height: 24.81px;
+    }
+
+    .put-a-smile__company-img_pet-shop-gembul {
+        width: 38.34px;
+        height: 34.96px;
+    }
+
+    .put-a-smile__company-img_binondo-beauty-supply {
+        width: 36.65px;
+        height: 37.21px;
+    }
+
+    .put-a-smile__company-img_toko-kita {
+        width: 38.34px;
+        height: 38.34px;
+    }
+
+    .put-a-smile__company-img_burger-and-lobster {
+        width: 46.23px;
+        height: 42.85px;
+    }
+
+    .put-a-smile__company-img_es-teh-indonesia {
+        width: 48.49px;
+        height: 16.91px;
+    }
+
+    .put-a-smile__company-img_kho-pa-ka {
+        width: 31.58px;
+        height: 38.34px;
+    }
+
+    .put-a-smile__company-img_gong-cha {
+        width: 36.56px;
+        height: 37.78px;
+    }
+
+    .put-a-smile__company-img_group-of-companies {
+        width: 37.21px;
+        height: 30.45px;
     }
 }
