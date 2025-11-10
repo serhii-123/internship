@@ -495,6 +495,10 @@ html, body {
         position: relative;
     }
 
+    .main__why-choose {
+        margin-bottom: 200px;
+    }
+
     .why-choose__particles-img {
         display: block;
         width: 213.57px;
@@ -667,4 +671,18 @@ html, body {
     .why-choose__navigation-item_selected {
         background-color: rgb(255, 255, 255);
     }
+
+    .put-a-smile {
+        position: relative;
+    }
+
+    .put-a-smile__heading {
+        margin-bottom: 222.23px;
+        font-family: 'Gilroy', sans-serif;
+        font-size: 28px;    
+        text-align: center;
+        color: #212121;       
+    }
+
+    .put-a-smile__
 }
