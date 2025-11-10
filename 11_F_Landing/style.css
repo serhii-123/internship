@@ -722,7 +722,7 @@ html, body {
 
     .put-a-smile__company-img-container_es-teh-indonesia,
     .put-a-smile__company-img-container_gong-cha {
-        transform: translateY(calc(100% + 4.26px)) rotate(45deg);
+        transform: translateY(calc(-100% - 4.26px)) rotate(45deg);
     }
 
     .put-a-smile__company-img {
