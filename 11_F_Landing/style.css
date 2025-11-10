@@ -677,12 +677,25 @@ html, body {
     }
 
     .put-a-smile__heading {
-        margin-bottom: 222.23px;
+        margin-bottom: 56.84px;
         font-family: 'Gilroy', sans-serif;
         font-size: 28px;    
         text-align: center;
         color: #212121;       
     }
+
+    .put-a-smile__companies-container {
+        display: flex;
+        justify-content: center;
+        column-gap: 6.26px;
+    }
+
+    .put-a-smile__company-img-container {
+        width: 56.64px;
+        height: 56.64px;
+    }
+
+    
 
     .put-a-smile__
 }
