@@ -691,11 +691,25 @@ html, body {
     }
 
     .put-a-smile__company-img-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 56.64px;
         height: 56.64px;
+        border-radius: 5px;
+        background: radial-gradient(circle,#dadada 0%,#fafafa 80%);
     }
 
-    
+    .put-a-smile__company-img-container_nayla {
+        transform: translateY(100% * 2 + 4.26px * 2) rotate(45deg);
+    }
 
-    .put-a-smile__
+    .put-a-smile__company-img {
+        display: block;
+    }
+
+    .put-a-smile__company-img_nayla {
+        width: 30.45px;
+        height: 37.21px;
+    }
 }
