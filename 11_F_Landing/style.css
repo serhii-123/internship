@@ -686,6 +686,10 @@ html, body {
         column-gap: 6.26px;
     }
 
+    .put-a-smile__companies-container:first-child {
+        margin-bottom: 108.85px;
+    }
+
     .put-a-smile__company-img-container {
         display: flex;
         justify-content: center;
