@@ -775,6 +775,43 @@ html, body {
     }
 
     .put-a-smile__central-block {
-        margin-bottom: 109.07px;
+        width: 242.54px;
+        height: 242.54px;
+        margin: 0 auto 109.07px;
+        border-radius: 17.75px;
+        padding: 13.77px;
+        position: relative;
+        background-color: rgba(251, 36, 43, 0.3);
+        transform: rotate(45deg);
+    }
+
+    .put-a-smile__nested-rectangle {
+        width: 215px;
+        height: 215px;
+        padding: 16.83px;
+        border-radius: 17.75px;
+        background-color: rgba(251, 36, 43, 0.3);
+    }
+
+    .put-a-smile__red-rectangle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 181.34px;
+        height: 181.34px;
+        border-radius: 17.75px;
+        background-color: rgb(251, 36, 43);
+    }
+
+    .put-a-smile__happy-businesses-container {
+        width: 181.34px;
+        transform: rotate(-45deg);
+    }
+
+    .put-a-smile__happy-businesses-text {
+        font-family: 'Gilroy', sans-serif;
+        font-size: 21px;
+        text-align: center;
+        color: rgb(255, 255, 255);
     }
 }
