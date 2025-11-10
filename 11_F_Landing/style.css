@@ -673,7 +673,7 @@ html, body {
     }
 
     .put-a-smile {
-        position: relative;
+
     }
 
     .put-a-smile__heading {
@@ -700,12 +700,23 @@ html, body {
         background: radial-gradient(circle,#dadada 0%,#fafafa 80%);
     }
 
-    .put-a-smile__company-img-container_nayla {
-        transform: translateY(100% * 2 + 4.26px * 2) rotate(45deg);
+    .put-a-smile__company-img-container_nayla,
+    .put-a-smile__company-img-container_toko-kita,
+    .put-a-smile__company-img-container_burger-and-lobster,
+    .put-a-smile__company-img-container_group-of-company {
+        transform: translateY(calc(100% * 2 + 4.26px * 2)) rotate(45deg);
+    }
+
+    .put-a-smile__company-img-container_hex-healthcare,
+    .put-a-smile__company-img-container_binondo-beauty-supply,
+    .put-a-smile__company-img-container_es-teh-indonesia,
+    .put-a-smile__company-img-container_gong-cha {
+        transform: translateY(calc(100% + 4.26px)) rotate(45deg);
     }
 
     .put-a-smile__company-img {
         display: block;
+        transform: rotate(-45deg);
     }
 
     .put-a-smile__company-img_nayla {
