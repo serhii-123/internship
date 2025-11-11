@@ -977,4 +977,20 @@ html, body {
     .footer__list .footer__item:last-child {
         margin: 0;
     }
+
+    .footer__social-block {
+        display: flex;
+        flex-direction: column;
+        align-items: center;   
+    }
+
+    .footer__social-container {
+        display: flex;
+        justify-content: center;
+        column-gap: 16px;
+    }
+
+    .footer__social-img {
+        display: block;
+    }
 }
