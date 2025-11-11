@@ -12,6 +12,7 @@ html, body {
     .wrapper__header {
         margin-bottom: 78px;
     }
+
     .header {
         display: flex;
         justify-content: space-between;
@@ -855,6 +856,7 @@ html, body {
     }
 
     .form-block__form-heading {
+        margin-bottom: 32px;
         font-family: 'Gilroy', sans-serif;
         font-size: 20px;
         text-align: center;
@@ -863,5 +865,9 @@ html, body {
 
     .form-block__highlighted-text {
         color: rgb(255, 71, 77);
+    }
+
+    .form-block__input-container {
+        margin-bottom: 16px;
     }
 }
