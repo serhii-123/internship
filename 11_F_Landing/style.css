@@ -964,4 +964,17 @@ html, body {
     .footer__list {
         list-style-type: none;
     }
+
+    .footer__item {
+        height: 27px;
+        margin-bottom: 16px;
+        font-family: 'Gilroy';
+        font-size: 14px;
+        text-align: center;
+        color: rgb(33, 33, 33);
+    }
+
+    .footer__list .footer__item:last-child {
+        margin: 0;
+    }
 }
