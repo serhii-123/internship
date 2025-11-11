@@ -871,7 +871,7 @@ html, body {
         margin-bottom: 16px;
     }
 
-    .form-block__input-container:last-child {
+    .form-block__input-container_last {
         margin-bottom: 48px;
     }
 
@@ -892,12 +892,32 @@ html, body {
         padding: 11px 16px 12px;
         background-color: rgb(243, 244, 245);
         font-family: 'Inter';
-        font-size: 17px;
+        font-size: 16px;
         color: rgb(189, 189, 189);
     }
 
     .form-block__input::placeholder {
         color: rgb(189, 189, 189);
         font-weight: 300;
+    }
+
+    .form-block__submit-btn {
+        display: block;
+        width: 180px;
+        height: 48px;
+        margin: 0 auto 14px;
+        border: none;
+        border-radius: 16px;
+        background-color: rgb(255, 71, 77);
+        font-family: 'Gilroy', sans-serif;
+        font-size: 16px;
+        color: rgb(255, 255, 255);
+    }
+
+    .form-block__promise-text {
+        font-family: 'Gilroy', sans-serif;
+        font-size: 14px;
+        text-align: center;
+        color: rgb(189, 189, 189);
     }
 }
