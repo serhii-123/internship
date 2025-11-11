@@ -934,4 +934,34 @@ html, body {
         bottom: -359px;
         right: 4px;
     }
+
+    .footer__logo-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 auto 24px;
+        width: 114px;
+        height: 38px;
+    }
+
+    .footer__logo-img {
+        display: block;
+        width: 43.55px;
+        height: 38px;
+    }
+
+    .footer__logo-text {
+        display: block;
+        width: 60.2px;
+        height: 19px;
+    }
+
+    .footer__nav {
+        width: 64px;
+        margin: 0 auto 48px;
+    }
+
+    .footer__list {
+        list-style-type: none;
+    }
 }
