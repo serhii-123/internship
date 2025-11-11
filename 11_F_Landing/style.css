@@ -855,6 +855,11 @@ html, body {
         background-color: rgb(255, 255, 255);
     }
 
+    .main__form-block {
+        margin-bottom: 422px;
+        position: relative;
+    }
+
     .form-block__form-heading {
         margin-bottom: 32px;
         font-family: 'Gilroy', sans-serif;
@@ -919,5 +924,14 @@ html, body {
         font-size: 14px;
         text-align: center;
         color: rgb(189, 189, 189);
+    }
+
+    .form-block__map-img {
+        display: block;
+        width: 559px;
+        height: 386px;
+        position: absolute;
+        bottom: -359px;
+        right: 4px;
     }
 }
