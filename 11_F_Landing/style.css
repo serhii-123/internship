@@ -672,6 +672,10 @@ html, body {
         background-color: rgb(255, 255, 255);
     }
 
+    .main__put-a-smile {
+        margin-bottom: 172.62px;
+    }
+
     .put-a-smile__heading {
         margin-bottom: 56.84px;
         font-family: 'Gilroy', sans-serif;
@@ -827,5 +831,14 @@ html, body {
         width: 137.16px;
         height: 51.02px;
         margin: 0 auto;
+    }
+
+    .form-block__heading {
+        width: 310px;
+        margin: 0 auto 89px;
+        font-family: 'Gilroy', sans-serif;
+        font-size: 28px;    
+        text-align: center;
+        color: #212121;
     }
 }
