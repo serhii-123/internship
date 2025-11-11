@@ -982,16 +982,32 @@ html, body {
         display: flex;
         flex-direction: column;
         align-items: center;
-        row-gap: 16px;   
+        row-gap: 16px;
+        margin-bottom: 16px;
     }
 
     .footer__social-container {
         display: flex;
         justify-content: center;
         column-gap: 16px;
+        width: 180px;
     }
 
     .footer__social-img {
         display: block;
     }
+
+    .footer__rights-text {
+        margin-bottom: 7px;
+        font-family: 'Inter', sans-serif;
+        font-size: 10px;
+        color: rgb(189, 189, 189);
+    }
+
+    .footer__service-link {
+        font-family: 'Gilroy';
+        color: rgb(189, 189, 189);
+    }
+
+    /* .footer__service-link_ */
 }
