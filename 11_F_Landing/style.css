@@ -841,4 +841,27 @@ html, body {
         text-align: center;
         color: #212121;
     }
+
+    .form-block__container {
+        width: 375px;
+        margin: 0 auto;
+        padding: 16px;
+    }
+
+    .form-block__form {
+        width: 375px;
+        padding: 40px 24px;
+        background-color: rgb(255, 255, 255);
+    }
+
+    .form-block__form-heading {
+        font-family: 'Gilroy', sans-serif;
+        font-size: 20px;
+        text-align: center;
+        color: #212121;
+    }
+
+    .form-block__highlighted-text {
+        color: rgb(255, 71, 77);
+    }
 }
