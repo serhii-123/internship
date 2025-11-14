@@ -935,6 +935,10 @@ html, body {
         right: 4px;
     }
 
+    .footer {
+        padding-bottom: 8px;
+    }
+
     .footer__logo-container {
         display: flex;
         justify-content: space-between;
@@ -997,6 +1001,11 @@ html, body {
         display: block;
     }
 
+    .footer__bottom-text-container{
+        width: 180px;
+        margin: 0 auto; 
+    }
+
     .footer__rights-text {
         margin-bottom: 7px;
         font-family: 'Inter', sans-serif;
@@ -1004,10 +1013,36 @@ html, body {
         color: rgb(189, 189, 189);
     }
 
+    .footer__service-links-container {
+        display: flex;
+        justify-content: right;
+        align-items: center;
+        column-gap: 8px;
+    }
+
     .footer__service-link {
         font-family: 'Gilroy';
         color: rgb(189, 189, 189);
     }
 
-    /* .footer__service-link_ */
+    .footer__service-link {
+        display: block;
+        font-family: 'Gilroy';
+        text-decoration: none;
+        color: rgb(189, 189, 189);
+    }
+
+    .footer__service-link_privacy-policy {
+        font-size: 10px;
+    }
+
+    .footer__service-link_terms-of-service {
+        font-size: 13px;
+    }
+
+    .footer__separator {
+        width: 1px;
+        height: 10px;
+        background-color: rgb(189, 189, 189);
+    }
 }
