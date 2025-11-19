@@ -56,8 +56,9 @@ html, body {
         margin-bottom: 36px;
     }
 
-    .get-started {
-        padding: 0 21px;
+    .get-started__main {
+        width: 333px;
+        margin: 0 auto;        
     }
 
     .get-started__heading-container {
@@ -129,14 +130,14 @@ html, body {
         height: 16px;
     }
 
-    .interface-img-container {
+    .get-started__img-container {
         width: 613.16px;
         height: 417px;
         position: relative;
         left: 0px;
     }
 
-    .interface-img-container__background-rectangle {
+    .get-started__background-rectangle-img {
         width: 658.57px;
         height: 669.72px;
         position: absolute;
@@ -145,7 +146,7 @@ html, body {
         transform: rotate(45deg);
     }
 
-    .interface-img-container__background-inserted-rectangle {
+    .get-started__background-inserted-rectangle-img {
         width: 615.02px;
         height: 615.02px;
         position: absolute;
@@ -154,15 +155,15 @@ html, body {
         transform: rotate(45deg);
     }
 
-    .interface-img-container__little-rectangles-small-img {
+    .get-started__little-rectangles-small-img {
         width: 162.87px;
         height: 123.25px;
         position: absolute;
-        top: -31.15px;
-        left: -10px;
+        top: 4.85px;
+        left: -14.87px;
     }
 
-    .interface-img-container__little-rectangles-big-img {
+    .get-started__little-rectangles-big-img {
         width: 277.53px;
         height: 210.02px;
         position: absolute;
@@ -170,21 +171,21 @@ html, body {
         left: 95px;
     }
     
-    .interface-img-container__mobile-interface-img {
+    .get-started__mobile-interface-img {
         width: 125.83px;
         height: 245.99px;
         position: absolute;
-        bottom: 0px;
-        left: 17px;
+        top: 199.47px;
+        left: 19.51px;
         transform: rotate(-8deg);
     }
 
-    .interface-img-container__pc-interface-img {
+    .get-started__pc-interface-img {
         width: 465.28px;
         height: 311.93px;
         position: absolute;
-        bottom: 60px;
-        left: 102px;
+        top: 66.86px;
+        left: 134.44px;
         transform: rotate(-8deg);
     }
 
