@@ -1,0 +1,10 @@
+@media (min-width: 768px) {
+    .get-started__heading {
+        font-size: 32px;
+    }
+
+    .get-started__description {
+        width: 477px;
+        font-size: 16px;
+    }
+}
