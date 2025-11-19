@@ -85,4 +85,31 @@
         width: 520.2px;
         height: 459px;
     }
+
+    .chain-transactions__img-block {
+        height: 820.98px;
+    }
+
+    .chain-transactions__background-rectangle {
+        width: 580.53px;
+        height: 580.53px;
+    }
+
+    .chain-transactions__background-inserted-rectangle {
+        width: 508.33px;
+        height: 508.33px;
+    }
+
+    .chain-transactions__fruit-planet-img {
+        width: 252px;
+        height: 500px;
+        top: 96.45px;
+    }
+
+    .chain-transactions__chats-img {
+        width: 252px;
+        height: 500px;
+        top: 219.6px;
+        transform: translate(calc(100% + 23px), 0) rotate(-8deg);
+    }
 }
