@@ -294,7 +294,8 @@ html, body {
 
     .chain-transactions__main {
         width: 367px;
-        margin: 0 0 57px 16px;
+        margin: 0 auto 57px;
+        padding-left: 16px;
     }
 
     .chain-transactions__heading {
@@ -423,9 +424,9 @@ html, body {
         width: 184px;
         height: 364px;
         position: absolute;
-        left: -6.57px;
+        left: 50%;
         top: 91.97px;
-        transform: rotate(-8deg);
+        transform: translate(calc(-100% - 10px), 0) rotate(-8deg);
     }
 
     .chain-transactions__chats-img {
@@ -433,9 +434,9 @@ html, body {
         width: 184px;
         height: 364px;
         position: absolute;
-        right: -8.43px;
+        right: 50%;
         top: 181.03px;
-        transform: rotate(-8deg);
+        transform: translate(calc(100% + 12px), 0) rotate(-8deg);
     }
 
     .featured-on {
