@@ -210,7 +210,7 @@ html, body {
 
     .check-out__main {
         width: 375px;
-        margin-bottom: 48.18px;
+        margin: 0 auto 48.18px;
         padding: 0 23.75px 0 8.25px;
         position: relative;
         z-index: 1;
@@ -265,6 +265,7 @@ html, body {
         display: block;
         width: 343px;
         height: 302.65px;
+        margin: 0 auto;
     }
 
     .check-out-block__left-small-rectangles-img {
