@@ -14,4 +14,44 @@
     .get-started__description {
         font-size: 16px;
     }
+
+    .get-started__img-container {
+        width: 1052.39;
+        height: 723px;
+    }
+
+    .get-started__background-rectangle-img {
+        width: 999px;
+        height: 999px;
+        top: 82.99px;
+        left: -499.1px;
+    }
+
+    .get-started__background-inserted-rectangle-img {
+        width: 921.24px;
+        height: 921.24px;
+        top: 121.78px;
+        left: -460.2px;
+    }
+
+    .get-started__little-rectangles-small-img {
+        width: 245px;
+        height: 181.5px;
+        left: 23px;
+        top: 29px;
+    }
+
+    .get-started__mobile-interface-img {
+        width: 199.95px;
+        height: 390.89px;
+        top: 293.1px;
+        left: 53.23px;
+    }
+
+    .get-started__pc-interface-img {
+        width: 811.28px;
+        height: 543.89px;
+        top: 26.81px;
+        left: 234.21px;
+    }
 }

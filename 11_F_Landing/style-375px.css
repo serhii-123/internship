@@ -194,7 +194,7 @@ html, body {
     }
 
     .check-out {
-        padding: 98.5px 8.25px 0;
+        padding-top: 98.5px;
         position: relative;
         z-index: 0;
     }
@@ -209,7 +209,9 @@ html, body {
     }
 
     .check-out__main {
+        width: 375px;
         margin-bottom: 48.18px;
+        padding: 0 23.75px 0 8.25px;
         position: relative;
         z-index: 1;
     }
