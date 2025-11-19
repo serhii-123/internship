@@ -54,4 +54,35 @@
         top: 26.81px;
         left: 234.21px;
     }
+
+    .check-out__main {
+        width: 460px;
+    }
+
+    .check-out__heading {
+        font-size: 32px;
+    }
+
+    .check-out__description {
+        font-size: 16px;
+    }
+
+    .check-out-block__left-small-rectangles-img {
+        width: 297px;
+        height: 224.75px;
+        top: -82px;
+        left: -46.57px;
+    }
+
+    .check-out__background-rectangle {
+        width: 2078.3px;
+        height: 956.1px;
+        top: -170.53px;
+        left: -70px;
+    }
+
+    .check-out__chats-orders-payments-img {
+        width: 520.2px;
+        height: 459px;
+    }
 }

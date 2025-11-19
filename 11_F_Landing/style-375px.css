@@ -275,6 +275,7 @@ html, body {
         position: absolute;
         top: 27.32px;
         left: -100.25px;
+        z-index: -1;
     }
     
     .check-out-block__right-small-rectangles-img {
@@ -284,6 +285,7 @@ html, body {
         position: absolute;
         top: 233.82px;
         right: -160.9px;
+        z-index: -1;
     }
 
     .main__chain-transactions {
