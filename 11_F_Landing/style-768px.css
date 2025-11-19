@@ -90,6 +90,13 @@
         height: 820.98px;
     }
 
+    .chain-transactions__particles-img {
+        width: 107.75px;
+        height: 167.41px;
+        top: 90.44px;
+        left: 8.92px;
+    }
+
     .chain-transactions__background-rectangle {
         width: 580.53px;
         height: 580.53px;
@@ -104,6 +111,7 @@
         width: 252px;
         height: 500px;
         top: 96.45px;
+        transform: translate(calc(-100% - 24px), 0) rotate(-8deg);
     }
 
     .chain-transactions__chats-img {
