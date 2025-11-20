@@ -168,6 +168,10 @@
         transform: translate(-17px, 10px);
     }
 
+    .main__why-choose {
+        margin-bottom: 274.54px;
+    }
+
     .why-choose {
         padding-top: 284px;
     }
@@ -222,5 +226,100 @@
     .why-choose__navigation-item {
         width: 12px;
         height: 12px;
+    }
+
+    .put-a-smile__heading {
+        font-size: 32px;
+    }
+
+    .put-a-smile__companies-container {
+        column-gap: 64.85px;
+    }
+
+    .put-a-smile__companies-container:first-child {
+        margin-bottom: 153.53px;
+    }
+
+    .put-a-smile__company-img-container {
+        width: 82.15px;
+        height: 82.15px;
+    }
+
+    .put-a-smile__company-img-container_nayla,
+    .put-a-smile__company-img-container_toko-kita {
+        transform: translateY(calc(100% * 2 + 31.85px * 2)) rotate(45deg);
+    }
+
+    .put-a-smile__company-img-container_pet-shop-gembul,
+    .put-a-smile__company-img-container_kho-pa-ka {
+        transform: rotate(45deg);
+    }
+
+    .put-a-smile__company-img-container_hex-healthcare,
+    .put-a-smile__company-img-container_binondo-beauty-supply {
+        transform: translateY(calc(100% + 31.85px)) rotate(45deg);
+    }
+
+    .put-a-smile__company-img-container_burger-and-lobster,
+    .put-a-smile__company-img-container_group-of-companies {
+        transform: translateY(calc(-100% * 2 - 31.85px * 2)) rotate(45deg);
+    }
+
+    .put-a-smile__company-img-container_es-teh-indonesia,
+    .put-a-smile__company-img-container_gong-cha {
+        transform: translateY(calc(-100% - 31.85px)) rotate(45deg);
+    }
+    
+    .put-a-smile__central-block {
+        width: 346.48px;
+        height: 346.48px;
+        border-radius: 25.35px;
+        padding: 19.67px;
+        margin-bottom: 153.53px;
+    }
+
+    .put-a-smile__nested-rectangle {
+        width: 307.15px;
+        height: 307.15px;
+        border-radius: 25.35px;
+        padding: 24.04px;
+    }
+
+    .put-a-smile__red-rectangle {
+        width: 259.06px;
+        height: 259.06px;
+        border-radius: 25.35px;
+    }
+
+    .form-block {
+        position: relative;
+    }
+
+    .form-block__background {
+        width: 1573.5px;
+        height: 1433px;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        clip-path: path("M0 0L1518.89 225.397C1550.27 230.052 1573.5 256.985 1573.5 288.703L1573.5 1369C1573.5 1404.35 1544.85 1433 1509.5 1433L0 1433L0 0Z");
+        z-index: -1;
+        background-color: rgb(246, 246, 246);
+    }
+
+    .form-block__heading {
+        width: 477px;
+        font-size: 32px;
+    }
+
+    .form-block__form-container {
+        width: 489px;
+        margin: 0 auto;
+        border-radius: 32px;
+        padding: 32px;
+        background: radial-gradient(
+            60% 60% at 50% 50%,
+            rgba(255, 255, 255, 0.6) 0%,
+            rgba(250, 250, 250, 0.6) 100%
+        );
     }
 }

@@ -869,12 +869,13 @@ html, body {
 
     .form-block__form {
         width: 375px;
+        margin: 0 auto;
         padding: 40px 24px;
         background-color: rgb(255, 255, 255);
     }
 
     .main__form-block {
-        margin-bottom: 422px;
+        margin-bottom: 63px;
         position: relative;
     }
 
@@ -944,13 +945,19 @@ html, body {
         color: rgb(189, 189, 189);
     }
 
+    .form-block__map-img-container {
+        width: 100%;
+        max-width: 100%;
+        height: 386px;
+        overflow: hidden;
+    }
+
     .form-block__map-img {
         display: block;
-        width: 559px;
-        height: 386px;
-        position: absolute;
-        bottom: -359px;
-        right: 4px;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: right center;
     }
 
     .footer {
