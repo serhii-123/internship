@@ -387,7 +387,7 @@ html, body {
         width: 83.19px;
         height: 130.22px;
         position: absolute;
-        top: 1.87px;
+        top: -1.87px;
         left: 12.39px;
         transform: rotate(147.97deg);
     }
@@ -410,7 +410,17 @@ html, body {
         transform: translate(-50%, -50%) rotate(45deg);
     }
 
-    .chain-transactions__little-rectangles {
+    .chain-transactions__little-rectangles-small {
+        display: block;
+        width: 215.35px;
+        height: 162.97px;
+        position: absolute;
+        top: -137px;
+        right: -96.35px;
+        z-index: -1;
+    }
+
+    .chain-transactions__little-rectangles-big {
         display: block;
         width: 277.55px;
         height: 210.04px;

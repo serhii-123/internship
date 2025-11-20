@@ -107,6 +107,20 @@
         height: 508.33px;
     }
 
+    .chain-transactions__little-rectangles-small {
+        width: 243.1px;
+        height: 183.97px;
+        top: -53.5px;
+        right: -91.1px;
+    }
+
+    .chain-transactions__little-rectangles-big {
+        width: 357.16px;
+        height: 270.28px;
+        right: 111.84px;
+        top: 116.5px;
+    }
+
     .chain-transactions__fruit-planet-img {
         width: 252px;
         height: 500px;
