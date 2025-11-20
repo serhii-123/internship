@@ -134,4 +134,38 @@
         top: 219.6px;
         transform: translate(calc(100% + 23px), 0) rotate(-8deg);
     }
+
+    .featured-on__wrapper {
+        width: 100%;
+    }
+
+    .featured-on__heading {
+        font-size: 32px;
+    }
+
+    .featured-on__horizontal-line {
+        width: 336px;
+    }
+
+    .featured-on__img-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        row-gap: 60px;
+        width: 490px;
+        margin: 0 auto;
+    }
+
+    .featured-on__img_techcrunch,
+    .featured-on__img_techinasia,
+    .featured-on__img_pymnts,
+    .featured-on__img_venturebeat {
+        margin: 0;
+    }
+
+    .featured-on__img_venturebeat {
+        transform: translate(-17px, 10px);
+    }
+
 }
