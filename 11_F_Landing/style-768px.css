@@ -168,4 +168,59 @@
         transform: translate(-17px, 10px);
     }
 
+    .why-choose {
+        padding-top: 284px;
+    }
+
+    .why-choose__particles-img {
+        width: 341.25px;
+        height: 654.08px;
+        top: -292.58px;
+        right: 156.01px;
+    }
+
+    .why-choose__background {
+        top: 103.37px;
+    }
+
+    .why-choose__wrapper {
+        width: 490px;
+        padding: 0;
+    }
+
+    .why-choose__heading {
+        margin: 0 0 32px;
+        font-size: 32px;
+        text-align: center;
+    }
+
+    .why-choose__review-block {
+        width: 490px;
+    }
+
+    .who-choose__review-text-container {
+        width: 474px;
+    }
+
+    .why-choose__clieng-logo {
+        width: 94px;
+        height: 48px;
+    }
+
+    .why-choose__client-name {
+        font-size: 18px;
+    }
+
+    .why-choose__client-description {
+        font-size: 12px;
+    }
+
+    .why-choose__navigation-list {
+        column-gap: 20.97px;
+    }
+
+    .why-choose__navigation-item {
+        width: 12px;
+        height: 12px;
+    }
 }
