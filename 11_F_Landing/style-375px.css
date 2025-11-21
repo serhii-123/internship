@@ -1073,4 +1073,8 @@ html, body {
         height: 10px;
         background-color: rgb(189, 189, 189);
     }
+
+    .footer__separator_service-link {
+        display: none;
+    }
 }

@@ -359,6 +359,10 @@
         transform: translate(-111px, -28px);
     }
 
+    .footer {
+        padding-bottom: 16px;
+    }
+
     .footer__nav {
         width: 100%;
         margin: 0;
@@ -401,9 +405,18 @@
 
     .footer__service-link_privacy-policy {
         font-size: 12px;
+        transform: translateY(2px);
+    }
+
+    .footer__service-link_terms-of-service {
+        transform: translateY(2px);
     }
 
     .footer__separator {
         height: 14px;
+    }
+
+    .footer__separator_service-link {
+        display: block;
     }
 }
