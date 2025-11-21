@@ -200,13 +200,34 @@
 
     .why-choose__review-block {
         width: 490px;
+        height: 610px;
+        transform: translateX(4px);
+    }
+
+    .why-choose__review-img-container {
+        height: 298px;
+    }
+
+    .why-choose__item-img {
+        left: 133px;
+    }
+
+    .why-choose__item-shadow-img {
+        left: 175.45px;
+    }
+
+    .why-choose__item-particles-img {
+        width: 64.77px;
+        height: 104.37px;
+        left: 274.57px;
+        top: 109.27px;
     }
 
     .who-choose__review-text-container {
         width: 474px;
     }
 
-    .why-choose__clieng-logo {
+    .why-choose__client-logo {
         width: 94px;
         height: 48px;
     }
@@ -321,5 +342,14 @@
             rgba(255, 255, 255, 0.6) 0%,
             rgba(250, 250, 250, 0.6) 100%
         );
+    }
+
+    .form-block__map-img-container {
+        width: 100%;
+        max-width: 699px;
+        height: 501px;
+        margin: 0 0 0 auto;
+        overflow: hidden;
+        transform: translate(-111px, -28px);
     }
 }

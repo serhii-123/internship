@@ -603,13 +603,16 @@ html, body {
     }
     
     .why-choose__item-shadow-img {
-        height: 235px;
+        width: auto;
+        height: 100%;
         position: absolute;
         top: 0;
         left: 125.48px;
     }
 
     .why-choose__item-img {
+        width: auto;
+        height: 100%;
         position: absolute;
         top: 0;
         left: 92px;
