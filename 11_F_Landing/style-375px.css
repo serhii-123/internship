@@ -530,18 +530,15 @@ html, body {
     }
 
     .why-choose__background {
+        width: 1848px;
+        height: 1154.06px;
         position: absolute;
-        top: 47.42px;
-        left: -71.28px;
-        transform: rotate(-8deg);
+        top: -70px;
+        left: 0;
         overflow: hidden;
         z-index: -1;
-    }
-
-    .why-choose__long-background-img {
-        display: block;
-        width: 1991.91px;
-        height: 904.53px;
+        clip-path: path("M0.000121519 307.721C0.000123971 275.844 23.4594 248.827 55.0215 244.354L1775.02 0.644787C1813.55 -4.81501 1848 25.0943 1848 64.0121L1848 847.792C1848 879.824 1824.32 906.922 1792.57 911.214L72.5754 1143.78C34.1709 1148.97 -9.08175e-07 1119.11 0 1080.35L0.000121519 307.721Z");
+        background-color: rgb(54, 54, 54);
     }
 
     .why-choose__left-background-rectangle-img {
