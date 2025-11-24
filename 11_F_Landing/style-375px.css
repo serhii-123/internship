@@ -148,13 +148,15 @@ html, body {
         background-color: rgba(252, 71, 77, 0.84);
     }
 
-    .get-started__background-inserted-rectangle-img {
+    .get-started__background-inserted-rectangle {
         width: 615.02px;
         height: 615.02px;
+        border-radius: 88px;
         position: absolute;
         left: -325px;
         bottom: -260px;
         transform: rotate(45deg);
+        background-color: rgb(251, 36, 43);
     }
 
     .get-started__little-rectangles-small-img {
@@ -548,24 +550,38 @@ html, body {
         background-color: rgb(54, 54, 54);
     }
 
-    .why-choose__left-background-rectangle-img {
+    .why-choose__left-background-rectangle {
         display: block;
         width: 626.13px;
         height: 626.13px;
+        border-radius: 72px;
         position: absolute;
         left: -356.24px;
         top: 43px;
         transform: rotate(45deg);
+        background: radial-gradient(
+            circle,
+            rgba(55, 55, 55, 1) 0%,
+            rgba(250, 250, 250, 0.1) 100%
+        );
+        opacity: 0.3;
     }
 
-    .why-choose__right-background-rectangle-img {
+    .why-choose__right-background-rectangle {
         display: block;
         width: 840.74px;
         height: 840.74px;
+        border-radius: 72px;
         position: absolute;
         top: 370px;
         left: calc(100vw - 0.12px);
         transform: rotate(45deg);
+        background: radial-gradient(
+            circle,
+            rgba(55, 55, 55, 1) 0%,
+            rgba(250, 250, 250, 0.1) 100%
+        );
+        opacity: 0.3;
     }
 
     .why-choose__little-rectangles {
@@ -719,6 +735,41 @@ html, body {
         margin-bottom: 108.85px;
     }
 
+    .put-a-smile__company-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 76px;
+        height: 76px;
+        border-radius: 8px;
+        background: radial-gradient(
+            circle, 
+            rgb(246, 245, 245) 0%,
+            rgb(250, 250, 250) 100%  
+        );
+        transform: rotate(45deg);
+    }
+
+    .put-a-smile__company-container_nayla,
+    .put-a-smile__company-container_toko-kita {
+        transform: translateY(150px) rotate(45deg);
+    }
+
+    .put-a-smile__company-container_hex-healthcare,
+    .put-a-smile__company-container_binondo-beauty-supply {
+        transform: translateY(75px) rotate(45deg);
+    }
+
+    .put-a-smile__company-container_burger-and-lobster,
+    .put-a-smile__company-container_group-of-companies {
+        transform: translateY(-150px) rotate(45deg);
+    }
+
+    .put-a-smile__company-container_es-teh-indonesia,
+    .put-a-smile__company-container_gong-cha {
+        transform: translateY(-75px) rotate(45deg);
+    }
+
     .put-a-smile__company-img-container {
         display: flex;
         justify-content: center;
@@ -727,31 +778,6 @@ html, body {
         height: 56.64px;
         border-radius: 5px;
         background: radial-gradient(circle,#dadada 0%,#fafafa 80%);
-    }
-
-    .put-a-smile__company-img-container_nayla,
-    .put-a-smile__company-img-container_toko-kita {
-        transform: translateY(calc(100% * 2 + 4.26px * 2)) rotate(45deg);
-    }
-
-    .put-a-smile__company-img-container_pet-shop-gembul,
-    .put-a-smile__company-img-container_kho-pa-ka {
-        transform: rotate(45deg);
-    }
-
-    .put-a-smile__company-img-container_hex-healthcare,
-    .put-a-smile__company-img-container_binondo-beauty-supply {
-        transform: translateY(calc(100% + 4.26px)) rotate(45deg);
-    }
-
-    .put-a-smile__company-img-container_burger-and-lobster,
-    .put-a-smile__company-img-container_group-of-companies {
-        transform: translateY(calc(-100% * 2 - 4.26px * 2)) rotate(45deg);
-    }
-
-    .put-a-smile__company-img-container_es-teh-indonesia,
-    .put-a-smile__company-img-container_gong-cha {
-        transform: translateY(calc(-100% - 4.26px)) rotate(45deg);
     }
 
     .put-a-smile__company-img {
