@@ -409,10 +409,12 @@ html, body {
     .chain-transactions__background-inserted-rectangle {
         width: 395.02px;
         height: 395.02px;
+        border-radius: 50px;
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%) rotate(45deg);
+        background-color: rgb(251, 36, 43);
     }
 
     .chain-transactions__little-rectangles-small {
