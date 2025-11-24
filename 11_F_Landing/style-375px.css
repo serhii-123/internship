@@ -746,6 +746,16 @@ html, body {
         z-index: -1;
     }
 
+    .put-a-smile__left-little-rectangles {
+        display: block;
+        width: 150.94px;
+        height: 114.22px;
+        position: absolute;
+        top: 296px;
+        left: -117.36px;
+        z-index: -1;
+    }
+
     .put-a-smile__heading {
         margin-bottom: 56.84px;
         font-family: 'Gilroy', sans-serif;
