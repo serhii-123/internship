@@ -272,29 +272,24 @@
         height: 82.15px;
     }
 
-    .put-a-smile__company-img-container_nayla,
-    .put-a-smile__company-img-container_toko-kita {
-        transform: translateY(calc(100% * 2 + 31.85px * 2)) rotate(45deg);
+    .put-a-smile__company-container_nayla,
+    .put-a-smile__company-container_toko-kita {
+        transform: translateY(280px) rotate(45deg);
     }
 
-    .put-a-smile__company-img-container_pet-shop-gembul,
-    .put-a-smile__company-img-container_kho-pa-ka {
-        transform: rotate(45deg);
+    .put-a-smile__company-container_hex-healthcare,
+    .put-a-smile__company-container_binondo-beauty-supply {
+        transform: translateY(140px) rotate(45deg);
     }
 
-    .put-a-smile__company-img-container_hex-healthcare,
-    .put-a-smile__company-img-container_binondo-beauty-supply {
-        transform: translateY(calc(100% + 31.85px)) rotate(45deg);
+    .put-a-smile__company-container_burger-and-lobster,
+    .put-a-smile__company-container_group-of-companies {
+        transform: translateY(-280px) rotate(45deg);
     }
 
-    .put-a-smile__company-img-container_burger-and-lobster,
-    .put-a-smile__company-img-container_group-of-companies {
-        transform: translateY(calc(-100% * 2 - 31.85px * 2)) rotate(45deg);
-    }
-
-    .put-a-smile__company-img-container_es-teh-indonesia,
-    .put-a-smile__company-img-container_gong-cha {
-        transform: translateY(calc(-100% - 31.85px)) rotate(45deg);
+    .put-a-smile__company-container_es-teh-indonesia,
+    .put-a-smile__company-container_gong-cha {
+        transform: translateY(-140px) rotate(45deg);
     }
     
     .put-a-smile__central-block {

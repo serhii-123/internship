@@ -524,7 +524,7 @@ html, body {
     }
 
     .main__why-choose {
-        margin-bottom: 200px;
+        margin-bottom: 242.37px;
     }
 
     .why-choose__particles-img {
@@ -715,6 +715,35 @@ html, body {
 
     .main__put-a-smile {
         margin-bottom: 172.62px;
+    }
+
+    .put-a-smile__background-container {
+        position: relative;
+    }
+
+    .put-a-smile__right-background-rectangle {
+        width: 272.75px;
+        height: 272.75px;
+        border-radius: 25.39px;
+        position: absolute;
+        top: -99.51px;
+        right: -177.24px;
+        background: radial-gradient(
+            circle,
+            rgb(218, 218, 218, 0.15) 0%,
+            rgba(250, 250, 250, 0.15) 100%
+        );
+        transform: rotate(45deg);
+    }
+
+    .put-a-smile__right-little-rectangles {
+        display: block;
+        width: 231.57px;
+        height: 175.24px;
+        position: absolute;
+        top: -65.97px;
+        right: -111.3px;
+        z-index: -1;
     }
 
     .put-a-smile__heading {
