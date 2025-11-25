@@ -532,22 +532,30 @@ html, body {
         width: 213.57px;
         height: 353.29px;
         position: absolute;
-        top: -121.73px;
-        right: 76.25px;
+        top: -33.73px;
+        left: calc(100vw - 291.82px);
         transform: rotate(90.55deg);
         z-index: -1;
     }
 
-    .why-choose__background {
-        width: 1848px;
-        height: 1154.06px;
+    .why-choose__background-container {
+        width: 1853px;
+        height: 1164.5px;
         position: absolute;
-        top: -70px;
+        top: -80px;
+        left: -2px;
+    }
+
+    .why-choose__long-background-rectangle {
+        width: 1848px;
+        height: 1154px;
+        position: absolute;
+        top: 0;
         left: 0;
-        overflow: hidden;
         z-index: -1;
-        clip-path: path("M0.000121519 307.721C0.000123971 275.844 23.4594 248.827 55.0215 244.354L1775.02 0.644787C1813.55 -4.81501 1848 25.0943 1848 64.0121L1848 847.792C1848 879.824 1824.32 906.922 1792.57 911.214L72.5754 1143.78C34.1709 1148.97 -9.08175e-07 1119.11 0 1080.35L0.000121519 307.721Z");
+        clip-path: path("M0.000115766 317.417C0.000120542 285.54 23.4594 258.522 55.0215 254.05L1848 0L1848 913.416L72.5754 1153.47C34.1709 1158.66 -5.80663e-06 1128.8 0 1090.05L0.000115766 317.417Z");
         background-color: rgb(54, 54, 54);
+        overflow: hidden;
     }
 
     .why-choose__left-background-rectangle {
@@ -582,6 +590,23 @@ html, body {
             rgba(250, 250, 250, 0.1) 100%
         );
         opacity: 0.3;
+    }
+
+    .why-choose__second-left-background-rectangle {
+        display: block;
+        width: 218.34px;
+        height: 218.34px;
+        border-radius: 20.32px;
+        position: absolute;
+        top: calc(100% + 52.98px);
+        left: -130.55px;
+        transform: rotate(45deg);
+        background: radial-gradient(
+            circle,
+            rgb(218, 218, 218) 0%,
+            rgb(250, 250, 250) 100%
+        );
+        opacity: 0.1;
     }
 
     .why-choose__little-rectangles {

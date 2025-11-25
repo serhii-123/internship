@@ -185,12 +185,28 @@
     .why-choose__particles-img {
         width: 341.25px;
         height: 654.08px;
-        top: -292.58px;
-        right: 156.01px;
+        top: -260.25px;
+        left: calc(100vw - 497.26px);
     }
 
-    .why-choose__background {
-        top: 0;
+    .why-choose__background-container {
+        width: 1853px;
+        height: 1219.83px;
+        top: -35px;
+        left: 0;
+    }
+
+    .why-choose__long-background-rectangle {
+        width: 1848px;
+        height: 1209.39px;
+        clip-path: path("M0 317.417C-1.17888e-06 285.54 23.4593 258.522 55.0214 254.05L1848 0L1848 968.745L72.5755 1208.8C34.171 1213.99 3.20526e-05 1184.13 3.06194e-05 1145.38L0 317.417Z");
+    }
+
+    .why-choose__second-left-background-rectangle {
+        width: 359.3px;
+        height: 359.3px;
+        top: calc(100% + 32.14px);
+        left: -145.6px;
     }
 
     .why-choose__wrapper {
@@ -259,7 +275,7 @@
         width: 381.07px;
         height: 288.37px;
         top: -131.61px;
-        left: -101.62px;
+        right: -101.62px;
     }
 
     .put-a-smile__left-little-rectangles {
