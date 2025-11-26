@@ -297,6 +297,18 @@ html, body {
         margin-bottom: 70px;
     }
 
+    .chain-transactions__background-container {
+        position: relative;
+    }
+
+    .chain-transactions__background-little-rectangles {
+        width: 215.35px;
+        height: 162.97px;
+        position: absolute;
+        top: 257px;
+        right: -96.35px;
+    }
+
     .chain-transactions__main {
         width: 367px;
         margin: 0 auto 57px;
@@ -945,6 +957,10 @@ html, body {
         width: 137.16px;
         height: 51.02px;
         margin: 0 auto;
+    }
+
+    .form-block__background-container {
+        display: none;
     }
 
     .form-block__heading {
