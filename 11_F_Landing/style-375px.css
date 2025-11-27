@@ -76,7 +76,8 @@ html, body {
 
     .get-started__heading {
         font-family: 'Gilroy', sans-serif;
-        font-size: 28px;    
+        font-size: 28px;
+        font-weight: 600;
         text-align: center;
         color: #212121;
     }
@@ -109,6 +110,7 @@ html, body {
         background-color: #FF474D;
         font-family: 'Gilroy';
         font-size: 16px;
+        font-weight: 700;
         color: #FFFFFF;
     }
 
@@ -121,6 +123,7 @@ html, body {
     .get-started__btn-description-text {
         font-family: 'Gilroy', sans-serif;
         font-size: 14px;
+        font-weight: 500;
         text-align: center;
         color: #5C5C5C;
     }
@@ -225,6 +228,7 @@ html, body {
         margin-bottom: 16px;
         font-family: 'Gilroy', sans-serif;
         font-size: 28px;
+        font-weight: 600;
         text-align: center;
         color: rgb(33, 33, 33);
     }
@@ -259,6 +263,8 @@ html, body {
     .check-out__play-text {
         font-family: 'Gilroy', sans-serif;
         font-size: 14px;
+        font-weight: 700;
+        transform: translateY(2px);
     }
 
     .check-out__img-container {
@@ -307,6 +313,7 @@ html, body {
         position: absolute;
         top: 257px;
         right: -96.35px;
+        z-index: -1;
     }
 
     .chain-transactions__main {
@@ -320,6 +327,7 @@ html, body {
         margin-bottom: 16px;
         font-family: 'Gilroy', sans-serif;
         font-size: 28px;
+        font-weight: 600;
         text-align: center;
         color: rgb(33, 33, 33);
     }
@@ -393,6 +401,7 @@ html, body {
         color: rgb(255, 255, 255);
         font-family: 'Gilroy';
         font-size: 16px;
+        font-weight: 700;
     }
 
     .chain-transactions__img-block {
@@ -484,7 +493,8 @@ html, body {
     .featured-on__heading {
         margin-bottom: 24px;
         font-family: 'Gilroy', sans-serif;
-        font-size: 28px;    
+        font-size: 28px;
+        font-weight: 600;
         text-align: center;
         color: #212121;
     }
@@ -556,6 +566,7 @@ html, body {
         position: absolute;
         top: -80px;
         left: -2px;
+        z-index: -1;
     }
 
     .why-choose__long-background-rectangle {
@@ -640,6 +651,7 @@ html, body {
         margin: 0 0 32px 26px;
         font-family: 'Gilroy', sans-serif;
         font-size: 28px;
+        font-weight: 600;
         text-align: left;
         color: rgb(255, 255, 255);
     }
@@ -709,6 +721,7 @@ html, body {
         margin-bottom: 4px;
         font-family: 'Gilroy', sans-serif;
         font-size: 16px;
+        font-weight: 700;
     }
 
     .why-choose__client-description {
@@ -796,7 +809,8 @@ html, body {
     .put-a-smile__heading {
         margin-bottom: 56.84px;
         font-family: 'Gilroy', sans-serif;
-        font-size: 28px;    
+        font-size: 28px;
+        font-weight: 600;
         text-align: center;
         color: #212121;       
     }
@@ -960,6 +974,7 @@ html, body {
         margin-bottom: 12.54px;
         font-family: 'Gilroy', sans-serif;
         font-size: 21px;
+        font-weight: 600;
         text-align: center;
         color: rgb(255, 255, 255);
     }
@@ -979,7 +994,8 @@ html, body {
         width: 310px;
         margin: 0 auto 89px;
         font-family: 'Gilroy', sans-serif;
-        font-size: 28px;    
+        font-size: 28px;
+        font-weight: 600;
         text-align: center;
         color: #212121;
     }
@@ -1006,6 +1022,7 @@ html, body {
         margin-bottom: 32px;
         font-family: 'Gilroy', sans-serif;
         font-size: 20px;
+        font-weight: 600;
         text-align: center;
         color: #212121;
     }
@@ -1058,12 +1075,14 @@ html, body {
         background-color: rgb(255, 71, 77);
         font-family: 'Gilroy', sans-serif;
         font-size: 16px;
+        font-weight: 700;
         color: rgb(255, 255, 255);
     }
 
     .form-block__promise-text {
         font-family: 'Gilroy', sans-serif;
         font-size: 14px;
+        font-weight: 500;
         text-align: center;
         color: rgb(189, 189, 189);
     }
@@ -1122,6 +1141,7 @@ html, body {
         margin-bottom: 16px;
         font-family: 'Gilroy';
         font-size: 14px;
+        font-weight: 500;
         text-align: center;
         color: rgb(33, 33, 33);
     }
@@ -1182,10 +1202,13 @@ html, body {
 
     .footer__service-link_privacy-policy {
         font-size: 10px;
+        font-weight: 500;
     }
 
     .footer__service-link_terms-of-service {
-        font-size: 13px;
+        font-size: 12px;
+        font-weight: 500;
+        transform: translateY(1px);
     }
 
     .footer__separator {
